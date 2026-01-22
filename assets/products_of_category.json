@@ -1,0 +1,94 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "'price": 4523,
+            "name": "shoes",
+            "description": "Product description",
+            "image_url": null,
+            "total_sold": 32,
+            "rate": 3.33
+        },
+        {
+            "id": 2,
+            "'price": 1563,
+            "name": "shoes",
+            "description": "Product description",
+            "image_url": null,
+            "total_sold": 32,
+            ",rate": 3.33
+        },
+        {
+            "id": 3,
+            "'price": 15986,
+            "name": "shoes",
+            "description": "Product description",
+            "image_url": null,
+            "total_sold": 32,
+            "rate": 3.33
+        },
+        {
+            "id": 4,
+            "'price": 5635,
+            "name": "shoes",
+            "description": "Product description",
+            "image_url": null,
+            "total_sold": 32,
+            "rate": 3.33
+        },
+        {
+            "id": 5,
+            "'price": 8524,
+            "name": "shoes",
+            "description": "Product description",
+            "image_url": null,
+            "total_sold": 32,
+            "rate": 3.33
+        },
+        {
+            "id": 6,
+            "'price": 5663,
+            "name": "shoes",
+            "description": "Product description",
+            "image_url": null,
+            "total_sold": 32,
+            "rate": 3.33
+        },
+        {
+            "id": 8,
+            "'price": 1656,
+            "name": "shoes",
+            "description": "Product description",
+            "image_url": null,
+            "total_sold": 32,
+            "rate": 3.33
+        },
+        {
+            "id": 9,
+            "'price": 566,
+            "name": "shoes",
+            "description": "Product description",
+            "image_url": null,
+            "total_sold": 32,
+            "rate": 3.33
+        },
+        {
+            "id": 10,
+            "'price": 569,
+            "name": "shoes",
+            "description": "Product description",
+            "image_url": null,
+            "total_sold": 32,
+            "rate": 3.33
+        },
+        {
+            "id": 11,
+            "'price": 569,
+            "name": "shoes",
+            "description": "Product description",
+            "image_url": null,
+            "total_sold": 32,
+            "rate": 3.33
+        }
+    ]
+}

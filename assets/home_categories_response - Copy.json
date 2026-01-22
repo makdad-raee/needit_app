@@ -1,0 +1,171 @@
+{
+    "success": true,
+    "data": {
+        "OFFERS": [
+            {
+                "id": 4,
+                "key": null,
+                "name": "Today’s Special!",
+                "description": "Get discount for every\norder. only valial for today",
+                "image_url": "https://e7.pngegg.com/pngimages/154/417/png-clipart-nikon-d610-nikon-d600-digital-slr-single-lens-reflex-camera-camara-grafica-lens-camera-lens.png",
+                "discount": 77
+            },
+            {
+                "id": 5,
+                "key": null,
+                "name": "New Arrivals",
+                "description": "Get discount for every\norder. only valial for today",
+                "image_url": "https://w7.pngwing.com/pngs/17/345/png-transparent-tote-bag-advertising-mail-handbag-poster-design-luggage-bags-poster-flyer.png",
+                "discount": 60
+            },
+            {
+                "id": 6,
+                "key": null,
+                "name": "Weekends Deals!",
+                "description": "Get discount for every\norder. only valial for today",
+                "image_url": "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEyL3Jhd3BpeGVsb2ZmaWNlNl9taW5pbWFsX2hlYWRwaG9uZV9pbl90aGVfc3R5bGVfb2ZfYWVzdGhldGljX25lb185ZWJhYmU3Yi0wNmM5LTQzMTItODI3Yy02M2FlYTMzMDFmOTFfMS5wbmc.png",
+                "discount": 77
+            },
+            {
+                "id": 7,
+                "key": null,
+                "name": "Black Friday",
+                "description": "Get discount for every\norder. only valial for today",
+                "image_url": "https://w1.pngwing.com/pngs/716/918/png-transparent-poster-shoe-sneakers-shoe-shop-sports-xtep-blue-white.png",
+                "discount": 20
+            }
+        ],
+        "MAIN": [
+            {
+                "id": 8,
+                "key": null,
+                "name": "Clothes",
+                "description": null,
+                "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Rpb_clothing_icon.svg",
+                "discount": null
+            },
+            {
+                "id": 9,
+                "key": null,
+                "name": "Shoes",
+                "description": null,
+                "image_url": "https://www.svgrepo.com/show/201120/shoe.svg",
+                "discount": null
+            },
+            {
+                "id": 10,
+                "key": null,
+                "name": "Electronics",
+                "description": null,
+                "image_url": "https://www.svgrepo.com/show/325134/electronics-chip.svg",
+                "discount": null
+            },
+            {
+                "id": 11,
+                "key": null,
+                "name": "Bags",
+                "description": null,
+                "image_url": "https://www.svgrepo.com/show/43071/shopping-bag.svg",
+                "discount": null
+            },
+            {
+                "id": 12,
+                "key": null,
+                "name": "Toys",
+                "description": null,
+                "image_url": "https://www.svgrepo.com/show/267679/rocking-horse-toy.svg",
+                "discount": null
+            },
+            {
+                "id": 13,
+                "key": null,
+                "name": "Jewelry",
+                "description": null,
+                "image_url": "https://pic.onlinewebfonts.com/thumbnails/icons_205432.svg",
+                "discount": null
+            },
+            {
+                "id": 14,
+                "key": null,
+                "name": "Kitchen",
+                "description": null,
+                "image_url": "https://www.svgrepo.com/show/125660/chef.svg",
+                "discount": null
+            },
+            {
+                "id": 15,
+                "key": null,
+                "name": "Watch",
+                "description": null,
+                "image_url": "https://assets.dryicons.com/uploads/icon/svg/5752/9029275f-bf56-4c10-901d-bcac65ae062c.svg",
+                "discount": null
+            }
+        ],
+        "POPULAR": [
+            {
+                "id": 8,
+                "key": null,
+                "name": "clothes",
+                "description": null,
+                "image_url": null,
+                "discount": null
+            },
+            {
+                "id": 9,
+                "key": null,
+                "name": "electronics",
+                "description": null,
+                "image_url": null,
+                "discount": null
+            },
+            {
+                "id": 10,
+                "key": null,
+                "name": "bags",
+                "description": null,
+                "image_url": null,
+                "discount": null
+            },
+            {
+                "id": 11,
+                "key": null,
+                "name": "toys",
+                "description": null,
+                "image_url": null,
+                "discount": null
+            },
+            {
+                "id": 12,
+                "key": null,
+                "name": "jewelry",
+                "description": null,
+                "image_url": null,
+                "discount": null
+            },
+            {
+                "id": 13,
+                "key": null,
+                "name": "kitchen",
+                "description": null,
+                "image_url": null,
+                "discount": null
+            },
+            {
+                "id": 14,
+                "key": null,
+                "name": "watch",
+                "description": null,
+                "image_url": null,
+                "discount": null
+            },
+            {
+                "id": 15,
+                "key": null,
+                "name": "shoes",
+                "description": null,
+                "image_url": null,
+                "discount": null
+            }
+        ]
+    }
+}
