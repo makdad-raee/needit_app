@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "723977692964",
+    "project_id": "needit-94d44",
+    "storage_bucket": "needit-94d44.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723977692964:android:b40549122aa77c5b0e35b1",
+        "android_client_info": {
+          "package_name": "com.example.needit_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQBHiKT6pJhF5qtcAc2wQFplPZq_SlK7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

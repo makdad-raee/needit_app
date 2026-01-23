@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/my_cart_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:needit_app/Features/product_details/presentation/bloc/details_bl
 import 'package:needit_app/constant.dart';
 import 'package:needit_app/core/NetworkApI/dio_helper.dart';
 import 'package:needit_app/core/utlis/simple_bloc_observer.dart';
+import 'package:needit_app/firebase_options.dart';
 
 import 'injection_container.dart' as di;
 
@@ -17,6 +19,7 @@ void main() async {
   await di.init();
   DioHelper.init();
   Bloc.observer = SimpleBlocObserver();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
