@@ -50,7 +50,7 @@ packages:
     source: hosted
     version: "2.1.2"
   cached_network_image:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: cached_network_image
       sha256: "7c1183e361e5c8b0a0f21a28401eecdbde252441106a9816400dd4c2b2424916"
@@ -122,7 +122,7 @@ packages:
     source: hosted
     version: "1.0.8"
   dartz:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: dartz
       sha256: e6acf34ad2e31b1eb00948692468c30ab48ac8250e0f0df661e29f12dd252168
@@ -130,7 +130,7 @@ packages:
     source: hosted
     version: "0.10.1"
   dio:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: dio
       sha256: d90ee57923d1828ac14e492ca49440f65477f4bb1263575900be731a3dac66a9
@@ -146,7 +146,7 @@ packages:
     source: hosted
     version: "2.1.1"
   equatable:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: equatable
       sha256: "3e0141505477fd8ad55d6eb4e7776d3fe8430be8e497ccb1521370c3f21a3e2b"
@@ -271,7 +271,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_bloc:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_bloc
       sha256: b594505eac31a0518bdcb4b5b79573b8d9117b193cc80cc12e17d639b10aa27a
@@ -303,7 +303,7 @@ packages:
     source: hosted
     version: "2.0.31"
   flutter_svg:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_svg
       sha256: "055de8921be7b8e8b98a233c7a5ef84b3a6fcc32f46f1ebf5b9bb3576d108355"
@@ -316,7 +316,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_verification_code:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_verification_code
       sha256: "75f520c884c08eb44d91920f6f62f2546fd5b56f32d0ba199e1d72044bd575b3"
@@ -329,7 +329,7 @@ packages:
     source: sdk
     version: "0.0.0"
   font_awesome_flutter:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: font_awesome_flutter
       sha256: b738e35f8bb4957896c34957baf922f99c5d415b38ddc8b070d14b7fa95715d4
@@ -337,7 +337,7 @@ packages:
     source: hosted
     version: "10.9.1"
   get_it:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: get_it
       sha256: d85128a5dae4ea777324730dc65edd9c9f43155c109d5cc0a69cab74139fbac1
@@ -361,7 +361,7 @@ packages:
     source: hosted
     version: "4.1.2"
   image_picker:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: image_picker
       sha256: "784210112be18ea55f69d7076e2c656a4e24949fa9e76429fe53af0c0f4fa320"
@@ -425,7 +425,7 @@ packages:
     source: hosted
     version: "0.2.2"
   internet_connection_checker:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: internet_connection_checker
       sha256: "1c683e63e89c9ac66a40748b1b20889fd9804980da732bf2b58d6d5456c8e876"
@@ -465,7 +465,7 @@ packages:
     source: hosted
     version: "5.1.1"
   lottie:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: lottie
       sha256: c5fa04a80a620066c15cf19cc44773e19e9b38e989ff23ea32e5903ef1015950
@@ -633,7 +633,7 @@ packages:
     source: hosted
     version: "0.28.0"
   shared_preferences:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: shared_preferences
       sha256: "6e8bf70b7fef813df4e9a36f658ac46d107db4b4cfe1048b477d4e453a8159f5"
@@ -694,7 +694,7 @@ packages:
     source: sdk
     version: "0.0.0"
   smooth_page_indicator:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: smooth_page_indicator
       sha256: b21ebb8bc39cf72d11c7cfd809162a48c3800668ced1c9da3aade13a32cf6c1c
@@ -798,7 +798,7 @@ packages:
     source: hosted
     version: "0.7.4"
   text_scroll:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: text_scroll
       sha256: "164b49e6134fca874989213d4e7ba225e2c3f9e30d9e32f14d543b2fc55716a0"
