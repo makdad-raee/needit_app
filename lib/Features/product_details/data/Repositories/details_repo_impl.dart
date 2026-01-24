@@ -27,14 +27,14 @@ class DetailsRepoImpl implements DetailsReposotory {
         localDataSource.cashedDetails(details);
         return right(details);
       } on ServerException {
-        return left(ServerFaliure());
+        return left(ServerFaliure(message: 'ServerFaliure'));
       }
     } else {
       try {
         final details = await localDataSource.getCashedDetails();
         return right(details);
       } on EmptyCasheException {
-        return left(EmptyCasheFailure());
+        return left(EmptyCasheFailure(message: 'EmptyCasheFailure'));
       }
     }
   }

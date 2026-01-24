@@ -30,14 +30,14 @@ class ShopReposetoriesImpl implements ShopRepository {
         return right(main);
       } on ServerException {
         print('==========isooooooooooooooooooo......');
-        return left(ServerFaliure());
+        return left(ServerFaliure(message: 'ServerFaliure'));
       }
     } else {
       try {
         final localMain = await localDataSource.getCachedMain();
         return right(localMain);
       } on EmptyCasheException {
-        return left(EmptyCasheFailure());
+        return left(EmptyCasheFailure(message: 'EmptyCasheFailure'));
       }
     }
   }
@@ -50,14 +50,14 @@ class ShopReposetoriesImpl implements ShopRepository {
         localDataSource.cachedOffer(offer);
         return right(offer);
       } on ServerException {
-        return left(ServerFaliure());
+        return left(ServerFaliure(message: 'ServerFaliure'));
       }
     } else {
       try {
         final localOffer = await localDataSource.getCachedOffer();
         return right(localOffer);
       } on EmptyCasheException {
-        return left(EmptyCasheFailure());
+        return left(EmptyCasheFailure(message: 'EmptyCasheFailure'));
       }
     }
   }
@@ -70,14 +70,14 @@ class ShopReposetoriesImpl implements ShopRepository {
         localDataSource.cachesPopular(popular);
         return right(popular);
       } on ServerException {
-        return left(ServerFaliure());
+        return left(ServerFaliure(message: 'ServerFaliure'));
       }
     } else {
       try {
         final localPopular = await localDataSource.getCachedPopular();
         return right(localPopular);
       } on EmptyCasheException {
-        return left(EmptyCasheFailure());
+        return left(EmptyCasheFailure(message: 'EmptyCasheFailure'));
       }
     }
   }
@@ -96,7 +96,7 @@ class ShopReposetoriesImpl implements ShopRepository {
         );
         return right(productsOfCategory);
       } on ServerException {
-        return left(ServerFaliure());
+        return left(ServerFaliure(message: 'ServerFaliure'));
       }
     } else {
       try {
@@ -104,7 +104,7 @@ class ShopReposetoriesImpl implements ShopRepository {
             .getCachedProductsofCategory(id: id);
         return right(productsOfCategoryFromLocal);
       } on EmptyCasheException {
-        return Left(EmptyCasheFailure());
+        return Left(EmptyCasheFailure(message: 'EmptyCasheFailure'));
       }
     }
   }

@@ -12,7 +12,7 @@ class RemoveOrderUseCase {
       await orderRepositoriesImpl.removeOrder(orderEntity: orderEntity);
       return Future.value(right(unit));
     } catch (e) {
-      return left(ServerFaliure());
+      return left(ServerFaliure(message: 'ServerFaliure'));
     }
   }
 }

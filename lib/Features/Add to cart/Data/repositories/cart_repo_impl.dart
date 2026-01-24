@@ -42,7 +42,7 @@ class CartRepoImpl implements CartReposotries {
       final result = await cartLocalDataSource.getAllCart();
       return right(result);
     } on EmptyCasheException {
-      return left(EmptyCasheFailure());
+      return left(EmptyCasheFailure(message: 'EmptyCasheFailure'));
     }
   }
 

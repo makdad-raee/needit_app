@@ -24,7 +24,7 @@ class AddLocationRepoImpl implements AddLocationRepo {
       );
       return Future.value(right(unit));
     } on Exception {
-      return Future.value(left(ServerFaliure()));
+      return Future.value(left(ServerFaliure(message: 'ServerFaliure')));
     }
   }
 }

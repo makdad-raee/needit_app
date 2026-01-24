@@ -12,7 +12,7 @@ class GetOrdersUseCase {
       var order = await orderRepositoriesImpl.getOrders();
       return Future.value(right(order));
     } catch (e) {
-      return left(ServerFaliure());
+      return left(ServerFaliure(message: 'serverFaliure'));
     }
   }
 }
