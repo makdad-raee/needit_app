@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:needit_app/Features/Account/Presentation/View/acoount_view.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/views/my_cart.dart';
+import 'package:needit_app/Features/Login/Presentation/view/login_view.dart';
 import 'package:needit_app/Features/Orders/Presentation/View/order_view.dart';
 import 'package:needit_app/Features/Shopping/view/widgets/home_view_shop.dart';
 import 'package:needit_app/constant.dart';
@@ -18,7 +18,8 @@ class _ShoppingViewState extends State<ShoppingView> {
     HomeViewShop(),
     MyCartView(),
     OrderView(),
-    AccountView(),
+    LoginView(),
+    // AccountView(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -8,97 +8,119 @@ class SignUpViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.end,
+    return Column(
+      children: [
+        SizedBox(height: MediaQuery.of(context).size.width * .1),
+        Row(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.width * .2),
-            Text(
-              'Create Your Account',
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                fontSize: 40,
-                fontFamily: kRubikRubikMedium,
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 40),
-                SizedBox(
-                  child: const CostomTextFormFilled(
-                    text: 'Email',
-                    prefixIcon: Icon(Icons.email, color: Colors.black38),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  height: 60,
-                  child: const CostomTextFormFilled(
-                    text: 'Password',
-                    prefixIcon: Icon(Icons.lock, color: Colors.black38),
-                    suffixIcon: Icon(Icons.visibility, color: Colors.black38),
-                  ),
-                ),
-                const SizedBox(height: 14),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Checkbox(
-                      value: false,
-                      onChanged: (value) {},
-                      activeColor: Theme.of(context).primaryColor,
-                    ),
-                    Text(
-                      'Remember me',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontSize: 12,
-                        fontFamily: kRubikRubikMedium,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const VerifyView(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      //      border: Border.all(width: 1, color: kprimaryColor),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Sign Up",
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontSize: 14,
-                          fontFamily: kSwiss721Bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.06),
-                const SignUpDiveder(),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.06),
-                const FaceBookAppleGoogleContainers(),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.06),
-                const AlreadyHaveAcoount(),
-              ],
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(Icons.arrow_back, size: 30, color: Colors.black),
             ),
           ],
         ),
-      ),
+        SizedBox(height: MediaQuery.of(context).size.width * .15),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Create Your Account',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontSize: 40,
+                    fontFamily: kRubikRubikMedium,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 40),
+                    SizedBox(
+                      child: const CostomTextFormFilled(
+                        text: 'Email',
+                        prefixIcon: Icon(Icons.email, color: Colors.black38),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      height: 60,
+                      child: const CostomTextFormFilled(
+                        text: 'Password',
+                        prefixIcon: Icon(Icons.lock, color: Colors.black38),
+                        suffixIcon: Icon(
+                          Icons.visibility,
+                          color: Colors.black38,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Checkbox(
+                          value: false,
+                          onChanged: (value) {},
+                          activeColor: Theme.of(context).primaryColor,
+                        ),
+                        Text(
+                          'Remember me',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.copyWith(
+                            fontSize: 12,
+                            fontFamily: kRubikRubikMedium,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const VerifyView(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          //      border: Border.all(width: 1, color: kprimaryColor),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Sign Up",
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium!.copyWith(
+                              fontSize: 14,
+                              fontFamily: kSwiss721Bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.06),
+                    const SignUpDiveder(),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.06),
+                    const FaceBookAppleGoogleContainers(),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.06),
+                    const AlreadyHaveAcoount(),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

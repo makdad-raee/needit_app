@@ -24,17 +24,19 @@ class LoginViewBody extends StatelessWidget {
             fontFamily: kRubikRubikMedium,
           ),
         ),
-        const SizedBox(height: 14),
+        // const SizedBox(height: 14),
         const LoginContainersOptions(
           text: 'Continue with Facebook',
           asset: 'assets/images/facebooksvg.svg',
         ),
-        const SizedBox(height: 24),
+        Spacer(),
+        // const SizedBox(height: 24),
         const LoginContainersOptions(
           text: 'Continue with Google',
           asset: 'assets/images/GrGoogle.svg',
         ),
-        const SizedBox(height: 24),
+        Spacer(),
+        // const SizedBox(height: 24),
         const LoginContainersOptions(
           text: 'Continue with Apple',
           asset: 'assets/images/applesvg.svg',
