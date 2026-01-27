@@ -8,6 +8,10 @@ import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/add_products_
 import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/get_all_cart_use_case.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/remove_from_cart_usecase.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/my_cart_bloc.dart';
+import 'package:needit_app/Features/Auth/Data/repos/auth_repo_impl.dart';
+import 'package:needit_app/Features/Auth/Domain/Repos/auth_repo.dart';
+import 'package:needit_app/Features/Auth/Domain/use%20cases/signup_usecase.dart';
+import 'package:needit_app/Features/Auth/presentation/bloc/signup_bloc.dart';
 import 'package:needit_app/Features/Shopping/data/data%20source/shop_local_data_source.dart';
 import 'package:needit_app/Features/Shopping/data/data%20source/shop_remote_data_source.dart';
 import 'package:needit_app/Features/Shopping/data/reposetries/shop_reposetories_impl.dart';
@@ -35,6 +39,7 @@ import 'package:needit_app/Features/product_details/data/Repositories/details_re
 import 'package:needit_app/Features/product_details/data/data%20source/local_data_source.dart';
 import 'package:needit_app/Features/product_details/data/data%20source/remote_data_source.dart';
 import 'package:needit_app/Features/product_details/presentation/bloc/details_bloc_bloc.dart';
+import 'package:needit_app/Features/services/firbase_auth_service.dart';
 import 'package:needit_app/core/network/network_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,6 +54,9 @@ Future<void> init() async {
       getAllPopularUseCase: sl.call(),
       getProductsOfCategoryUseCase: sl.call(),
     ),
+  );
+  sl.registerFactory<SignupBloc>(
+    () => SignupBloc(signupUpWhithEmilAndpasswordUsecase: sl.call()),
   );
   sl.registerFactory(() => DetailsBlocBloc(getDetailsUseCase: sl.call()));
   sl.registerFactory(
@@ -87,6 +95,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton(
     () => AddShippingTypeUseCase(addShippingRepo: sl.call()),
+  );
+  sl.registerLazySingleton<SignupUpWhithEmilAndpasswordUsecase>(
+    () => SignupUpWhithEmilAndpasswordUsecase(authRepo: sl.call()),
   );
   sl.registerLazySingleton<AddShippingRepo>(
     () => AddShippingTypeRepoImpl(checkoutRemoteDataSource: sl.call()),
@@ -144,6 +155,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<CheckoutRemoteDataSource>(
     () => CheckoutRemoteDataSourceImpl(),
+  );
+  sl.registerLazySingleton<AuthRepo>(
+    () => AuthRepoImpl(firbaseAuthService: FirbaseAuthService()),
   );
 
   //! core
