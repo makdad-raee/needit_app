@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:needit_app/Features/Auth/presentation/bloc/signup_bloc.dart';
 import 'package:needit_app/constant.dart';
+import 'package:needit_app/core/widgets/password_filed.dart';
 
 class SignUpViewBody extends StatefulWidget {
   const SignUpViewBody({super.key});
@@ -81,16 +82,10 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                         const SizedBox(height: 20),
                         SizedBox(
                           height: 60,
-                          child: CostomTextFormFilled(
+                          child: PasswordFilled(
                             onSaved: (value) {
                               password = value!;
                             },
-                            text: 'Password',
-                            prefixIcon: Icon(Icons.lock, color: Colors.black38),
-                            suffixIcon: Icon(
-                              Icons.visibility,
-                              color: Colors.black38,
-                            ),
                           ),
                         ),
                         const SizedBox(height: 14),
@@ -182,40 +177,6 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   }
 }
 
-class AlreadyHaveAcoount extends StatelessWidget {
-  const AlreadyHaveAcoount({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Already have an account?',
-          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-            fontSize: 10,
-            fontFamily: kSwiss721Bold,
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            // Navigator.of(context).push(MaterialPageRoute(
-            //     builder: (context) => const SignUpView()));
-          },
-          child: Text(
-            'Login? ',
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(
-              fontSize: 10,
-              color: Theme.of(context).primaryColor,
-              fontFamily: kSwiss721Bold,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class FaceBookAppleGoogleContainers extends StatelessWidget {
   const FaceBookAppleGoogleContainers({super.key});
 
@@ -275,15 +236,18 @@ class CostomTextFormFilled extends StatelessWidget {
     required this.prefixIcon,
     this.suffixIcon,
     this.onSaved,
+    this.obscureText = false,
   });
   final String text;
   final Widget prefixIcon;
   final Widget? suffixIcon;
   final void Function(String?)? onSaved;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscureText,
       onSaved: onSaved,
       style: TextStyle(fontSize: 18),
       validator: (value) {

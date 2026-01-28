@@ -4,6 +4,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:needit_app/Features/Auth/Domain/use%20cases/signup_usecase.dart';
 import 'package:needit_app/Features/Auth/presentation/bloc/signup_bloc.dart';
 import 'package:needit_app/Features/Sign_Up/Presentation/view/widgets/sign_up_view_body.dart';
+import 'package:needit_app/core/utlis/build_error_bar.dart';
 import 'package:needit_app/injection_container.dart' as di;
 
 class SignUpView extends StatelessWidget {
@@ -25,9 +26,7 @@ class SignUpView extends StatelessWidget {
             // push(MaterialPageRoute(builder: (context) => const VerifyView()));
           }
           if (state is Signupfailure) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.error)));
+            buildErrorBar(context, state.error);
           }
         },
         builder:
