@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:needit_app/Features/Auth/presentation/bloc/signup_bloc.dart';
 import 'package:needit_app/constant.dart';
+import 'package:needit_app/core/utlis/build_error_bar.dart';
+import 'package:needit_app/core/widgets/custom_text_form_filled.dart';
 import 'package:needit_app/core/widgets/password_filed.dart';
 
 class SignUpViewBody extends StatefulWidget {
@@ -16,6 +18,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late String email, name, password;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  bool isTermsAndConditionAccepted = false;
+  bool isRememberMe = false;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -89,12 +93,20 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                           ),
                         ),
                         const SizedBox(height: 14),
+                        ConditionAndTerms(
+                          onChanged: (value) {
+                            isTermsAndConditionAccepted = value;
+                          },
+                        ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Checkbox(
-                              value: false,
-                              onChanged: (value) {},
+                              value: isRememberMe,
+                              onChanged: (value) {
+                                isRememberMe = value!;
+                                setState(() {});
+                              },
                               activeColor: Theme.of(context).primaryColor,
                             ),
                             Text(
@@ -113,18 +125,20 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                           onTap: () {
                             if (formKey.currentState!.validate()) {
                               formKey.currentState!.save();
-                              BlocProvider.of<SignupBloc>(context).add(
-                                SignupWhithEmailAndPasswordEvent(
-                                  email: email,
-                                  password: password,
-                                  name: name,
-                                ),
-                              );
-                              // Navigator.of(context).push(
-                              //   MaterialPageRoute(
-                              //     builder: (context) => const VerifyView(),
-                              //   ),
-                              // );
+                              if (isTermsAndConditionAccepted) {
+                                BlocProvider.of<SignupBloc>(context).add(
+                                  SignupWhithEmailAndPasswordEvent(
+                                    email: email,
+                                    password: password,
+                                    name: name,
+                                  ),
+                                );
+                              } else {
+                                buildErrorBar(
+                                  context,
+                                  'Pleas accept Terms and conditions',
+                                );
+                              }
                             } else {
                               setState(() {
                                 autovalidateMode = AutovalidateMode.always;
@@ -177,6 +191,55 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   }
 }
 
+class ConditionAndTerms extends StatefulWidget {
+  const ConditionAndTerms({super.key, required this.onChanged});
+  final ValueChanged<bool> onChanged;
+
+  @override
+  State<ConditionAndTerms> createState() => _ConditionAndTermsState();
+}
+
+class _ConditionAndTermsState extends State<ConditionAndTerms> {
+  bool isAccepted = false;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Checkbox(
+          value: isAccepted,
+          activeColor: Theme.of(context).primaryColor,
+          onChanged: (value) {
+            widget.onChanged(value!);
+            setState(() {
+              isAccepted = value;
+            });
+          },
+        ),
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              style: const TextStyle(color: Colors.black, fontSize: 13),
+              children: [
+                const TextSpan(text: 'I agree to the '),
+                TextSpan(
+                  text: 'Terms and Conditions',
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
+                  // هنا يمكنك إضافة التعرف على الضغط لفتح صفحة الشروط
+                  // recognizer: TapGestureRecognizer()..onTap = () => print('Open Terms'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class FaceBookAppleGoogleContainers extends StatelessWidget {
   const FaceBookAppleGoogleContainers({super.key});
 
@@ -225,67 +288,6 @@ class FaceBookAppleGoogleContainers extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class CostomTextFormFilled extends StatelessWidget {
-  const CostomTextFormFilled({
-    super.key,
-    required this.text,
-    required this.prefixIcon,
-    this.suffixIcon,
-    this.onSaved,
-    this.obscureText = false,
-  });
-  final String text;
-  final Widget prefixIcon;
-  final Widget? suffixIcon;
-  final void Function(String?)? onSaved;
-  final bool obscureText;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      obscureText: obscureText,
-      onSaved: onSaved,
-      style: TextStyle(fontSize: 18),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Cant be Empty";
-        } else {
-          return null;
-        }
-      },
-      cursorColor: kprimaryColor,
-      cursorHeight: 24,
-      decoration: InputDecoration(
-        fillColor: const Color(0xffF5F5F5),
-        filled: true,
-        hintText: text,
-
-        labelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-          fontSize: 12,
-          fontFamily: kRubikRubikMedium,
-          color: Colors.black38,
-        ),
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        contentPadding: EdgeInsets.all(15),
-        hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-          fontSize: 12,
-          fontFamily: kRubikRubikMedium,
-          color: Colors.black38,
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white, width: 0),
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: kprimaryColor, width: 1.5),
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-        ),
-      ),
     );
   }
 }

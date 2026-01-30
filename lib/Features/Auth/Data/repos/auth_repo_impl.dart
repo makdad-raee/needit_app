@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:needit_app/Features/Auth/Data/models/user_model.dart';
 import 'package:needit_app/Features/Auth/Domain/Repos/auth_repo.dart';
@@ -24,8 +26,10 @@ class AuthRepoImpl implements AuthRepo {
       );
       return right(UserModel.fromFireBaseUser(user));
     } on CustomException catch (e) {
+      log('error in authrepoimpl of createUserWithEmailAndPassword is $e');
       return left(ServerFaliure(message: e.message));
     } catch (e) {
+      log('error in authrepoimpl of createUserWithEmailAndPassword is $e');
       return left(ServerFaliure(message: 'An error occured try again'));
     }
   }

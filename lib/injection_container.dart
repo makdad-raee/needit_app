@@ -12,6 +12,10 @@ import 'package:needit_app/Features/Auth/Data/repos/auth_repo_impl.dart';
 import 'package:needit_app/Features/Auth/Domain/Repos/auth_repo.dart';
 import 'package:needit_app/Features/Auth/Domain/use%20cases/signup_usecase.dart';
 import 'package:needit_app/Features/Auth/presentation/bloc/signup_bloc.dart';
+import 'package:needit_app/Features/Login/Data/repo/login_repo_impl.dart';
+import 'package:needit_app/Features/Login/Domain/Repos/login_repo.dart';
+import 'package:needit_app/Features/Login/Domain/usecase/login_use_case.dart';
+import 'package:needit_app/Features/Login/Presentation/Bloc/login_bloc.dart';
 import 'package:needit_app/Features/Shopping/data/data%20source/shop_local_data_source.dart';
 import 'package:needit_app/Features/Shopping/data/data%20source/shop_remote_data_source.dart';
 import 'package:needit_app/Features/Shopping/data/reposetries/shop_reposetories_impl.dart';
@@ -58,6 +62,9 @@ Future<void> init() async {
   sl.registerFactory<SignupBloc>(
     () => SignupBloc(signupUpWhithEmilAndpasswordUsecase: sl.call()),
   );
+  sl.registerFactory(
+    () => LoginBloc(loginWhithEmilAndpasswordUsecase: sl.call()),
+  );
   sl.registerFactory(() => DetailsBlocBloc(getDetailsUseCase: sl.call()));
   sl.registerFactory(
     () => MyCartBloc(
@@ -99,6 +106,18 @@ Future<void> init() async {
   sl.registerLazySingleton<SignupUpWhithEmilAndpasswordUsecase>(
     () => SignupUpWhithEmilAndpasswordUsecase(authRepo: sl.call()),
   );
+  sl.registerLazySingleton<LoginWhithEmilAndpasswordUsecase>(
+    () => LoginWhithEmilAndpasswordUsecase(loginRepo: sl.call()),
+  );
+
+  //! repository
+  sl.registerLazySingleton<ShopRepository>(
+    () => ShopReposetoriesImpl(
+      remoteDataSource: sl.call(),
+      localDataSource: sl.call(),
+      networkInfo: sl.call(),
+    ),
+  );
   sl.registerLazySingleton<AddShippingRepo>(
     () => AddShippingTypeRepoImpl(checkoutRemoteDataSource: sl.call()),
   );
@@ -107,14 +126,6 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<AddPromoRepo>(
     () => AddPromoRepoImpl(checkoutRemoteDataSource: sl.call()),
-  );
-  //! repository
-  sl.registerLazySingleton<ShopRepository>(
-    () => ShopReposetoriesImpl(
-      remoteDataSource: sl.call(),
-      localDataSource: sl.call(),
-      networkInfo: sl.call(),
-    ),
   );
   sl.registerLazySingleton<DetailsReposotory>(
     () => DetailsRepoImpl(
@@ -128,6 +139,9 @@ Future<void> init() async {
       cartLocalDataSource: sl.call(),
       cartRemoteSource: sl.call(),
     ),
+  );
+  sl.registerLazySingleton<LoginRepo>(
+    () => LoginRepoImpl(firbaseAuthService: FirbaseAuthService()),
   );
   sl.registerLazySingleton(
     () => AddShippingTypeRepoImpl(checkoutRemoteDataSource: sl.call()),
