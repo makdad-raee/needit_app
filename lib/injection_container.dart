@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:needit_app/Features/Account/Data/repo/create_user_from_firebase_repo_impl.dart';
+import 'package:needit_app/Features/Account/Domain/repos/create_user_from_firebase_repo.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Data/Local/cart_local_data_source.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Data/Remote/cart_remote_source.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Data/repositories/cart_repo_impl.dart';
@@ -44,6 +46,7 @@ import 'package:needit_app/Features/product_details/data/data%20source/local_dat
 import 'package:needit_app/Features/product_details/data/data%20source/remote_data_source.dart';
 import 'package:needit_app/Features/product_details/presentation/bloc/details_bloc_bloc.dart';
 import 'package:needit_app/Features/services/firbase_auth_service.dart';
+import 'package:needit_app/Features/services/firestore_service.dart';
 import 'package:needit_app/core/network/network_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -143,6 +146,7 @@ Future<void> init() async {
   sl.registerLazySingleton<LoginRepo>(
     () => LoginRepoImpl(firbaseAuthService: FirbaseAuthService()),
   );
+
   sl.registerLazySingleton(
     () => AddShippingTypeRepoImpl(checkoutRemoteDataSource: sl.call()),
   );
@@ -171,7 +175,13 @@ Future<void> init() async {
     () => CheckoutRemoteDataSourceImpl(),
   );
   sl.registerLazySingleton<AuthRepo>(
-    () => AuthRepoImpl(firbaseAuthService: FirbaseAuthService()),
+    () => AuthRepoImpl(
+      firbaseAuthService: FirbaseAuthService(),
+      createUserFromFirebaseRepoImpl: sl.call(),
+    ),
+  );
+  sl.registerLazySingleton<CreateUserFromFirebaseRepo>(
+    () => CreateUserFromFirebaseRepoImpl(firestorService: FirestorService()),
   );
 
   //! core

@@ -10,11 +10,5 @@ class UserModel extends UserUntity {
       email: user.email ?? '',
     );
   }
-  factory UserModel.fromUserCreditinal(UserCredential userCredential) {
-    return UserModel(
-      name: userCredential.user!.displayName!,
-      uid: userCredential.user!.uid,
-      email: userCredential.user!.email!,
-    );
-  }
+
 }

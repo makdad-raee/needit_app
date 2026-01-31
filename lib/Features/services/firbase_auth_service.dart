@@ -43,6 +43,7 @@ class FirbaseAuthService {
       );
       return user;
     } on FirebaseAuthException catch (e) {
+      log('error code in loginWithEmailAndPassword: ${e.code}');
       if (e.code == 'user-not-found') {
         log('No user found for that email.');
         throw CustomException('user-not-found');
@@ -50,9 +51,11 @@ class FirbaseAuthService {
         log('Wrong password provided for that user.');
         throw CustomException('Wrong password provided for that user.');
       } else {
+        log(e.toString());
         throw CustomException('An error occured try again');
       }
     } catch (e) {
+      log(e.toString());
       throw CustomException('An error occured try again');
     }
   }

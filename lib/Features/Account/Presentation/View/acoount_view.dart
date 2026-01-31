@@ -4,7 +4,11 @@ import 'package:needit_app/Features/Account/Presentation/View/Widgets/account_vi
 import 'package:needit_app/constant.dart';
 
 class AccountView extends StatelessWidget {
-  const AccountView({super.key});
+  const AccountView({super.key,
+  
+  //  required this.userDetailsEntity
+ });
+  // final UserProfileDetailsEntity userDetailsEntity;
 
   @override
   Widget build(BuildContext context) {

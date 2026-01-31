@@ -20,7 +20,7 @@ class LoginRepoImpl implements LoginRepo {
         email: email,
         password: password,
       );
-      return right(UserModel.fromUserCreditinal(usercreditnal));
+      return right(UserModel.fromFireBaseUser(usercreditnal.user!));
     } on CustomException catch (e) {
       return left(ServerFaliure(message: e.toString()));
     } catch (e) {

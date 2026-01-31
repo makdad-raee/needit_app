@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needit_app/Features/Login/Presentation/Bloc/login_bloc.dart';
@@ -16,7 +18,7 @@ class LoginFieldsBody extends StatefulWidget {
 
 class _LoginFieldsBodyState extends State<LoginFieldsBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late String email, name, password;
+  late String email, password;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   bool isTermsAndConditionAccepted = false;
   bool isRememberMe = false;
@@ -43,13 +45,20 @@ class _LoginFieldsBodyState extends State<LoginFieldsBody> {
                 const SizedBox(height: 40),
                 SizedBox(
                   height: 60,
-                  child: const CostomTextFormFilled(
+                  child:  CostomTextFormFilled(
+                    onSaved: (value) {
+                      email = value!;
+                    },
                     text: 'Email',
                     prefixIcon: Icon(Icons.email),
                   ),
                 ),
                 const SizedBox(height: 20),
-                SizedBox(height: 60, child: const PasswordFilled()),
+                SizedBox(height: 60, child:  PasswordFilled(
+
+                  onSaved:(value) {
+                  password = value!;
+                } ,)),
                 const SizedBox(height: 14),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -76,16 +85,17 @@ class _LoginFieldsBodyState extends State<LoginFieldsBody> {
                 const SizedBox(height: 16),
                 GestureDetector(
                   onTap: () {
+                    log('pressed');
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
-                      if (isTermsAndConditionAccepted) {
+                    
                         BlocProvider.of<LoginBloc>(context).add(
                           LoginWhithEmailAndPasswordEvent(
                             email: email,
                             password: password,
                           ),
                         );
-                      }
+                      
                     } else {
                       setState(() {
                         autovalidateMode = AutovalidateMode.always;
