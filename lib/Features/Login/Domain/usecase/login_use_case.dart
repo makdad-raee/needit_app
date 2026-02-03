@@ -7,7 +7,7 @@ class LoginWhithEmilAndpasswordUsecase {
   final LoginRepo loginRepo;
 
   LoginWhithEmilAndpasswordUsecase({required this.loginRepo});
-  Future<Either<Failure, UserUntity>> call({
+  Future<Either<Failure, UserEntity>> call({
     required String email,
     required String password,
   }) async {

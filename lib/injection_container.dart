@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:needit_app/Features/Account/Data/repo/create_user_from_firebase_repo_impl.dart';
@@ -60,6 +62,12 @@ Future<void> init() async {
       getAllOfferUseCase: sl.call(),
       getAllPopularUseCase: sl.call(),
       getProductsOfCategoryUseCase: sl.call(),
+    ),
+  );
+  sl.registerLazySingleton(
+    () => FirebaseFirestore.instanceFor(
+      app: Firebase.app(),
+      databaseId: '(default)',
     ),
   );
   sl.registerFactory<SignupBloc>(
@@ -144,7 +152,7 @@ Future<void> init() async {
     ),
   );
   sl.registerLazySingleton<LoginRepo>(
-    () => LoginRepoImpl(firbaseAuthService: FirbaseAuthService()),
+    () => LoginRepoImpl(firbaseAuthService: FirbaseAuthService(), sl.call()),
   );
 
   sl.registerLazySingleton(
@@ -174,10 +182,13 @@ Future<void> init() async {
   sl.registerLazySingleton<CheckoutRemoteDataSource>(
     () => CheckoutRemoteDataSourceImpl(),
   );
+  sl.registerLazySingleton(() => FirestorService());
   sl.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
       firbaseAuthService: FirbaseAuthService(),
-      createUserFromFirebaseRepoImpl: sl.call(),
+      createUserFromFirebaseRepo: CreateUserFromFirebaseRepoImpl(
+        firestorService: sl.call(),
+      ),
     ),
   );
   sl.registerLazySingleton<CreateUserFromFirebaseRepo>(

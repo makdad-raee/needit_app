@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:needit_app/Features/Auth/Domain/entites/user_untity.dart';
 import 'package:needit_app/Features/Profile/Presentation/View/widgets/profile_picture.dart';
 import 'package:needit_app/constant.dart';
 
 class AccountViewBodySection1 extends StatelessWidget {
-  const AccountViewBodySection1({super.key});
+  const AccountViewBodySection1({super.key, required this.userEntity});
+  final UserEntity userEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class AccountViewBodySection1 extends StatelessWidget {
         ProfilePicture(),
         SizedBox(height: 10),
         Text(
-          'Nada Jbour',
+          userEntity.name,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontFamily: kRubikRubikMedium,
             fontSize: 28,

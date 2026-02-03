@@ -7,12 +7,16 @@ class LoginInitial extends LoginState {}
 
 class LoginLoading extends LoginState {}
 
-class LoginSuccess extends LoginState {
-  final UserUntity user;
-  LoginSuccess({required this.user});
+class LoginSuccessAndGetUserData extends LoginState {
+  final UserEntity user;
+  LoginSuccessAndGetUserData({required this.user});
 }
 
 class Loginfailure extends LoginState {
   final String error;
   Loginfailure({required this.error});
 }
+// class GetCurrentUserDataSuccess extends LoginState {
+//   final UserEntity user;
+//   GetCurrentUserDataSuccess({required this.user});
+// }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:needit_app/Features/Account/Presentation/View/Widgets/account_view_body_section1.dart';
 import 'package:needit_app/Features/Account/Presentation/View/Widgets/account_view_body_section2.dart';
+import 'package:needit_app/Features/Auth/Domain/entites/user_untity.dart';
 
 class AccountViewBody extends StatelessWidget {
-  const AccountViewBody({super.key});
+  const AccountViewBody({super.key, required this.userEntity});
+  final UserEntity userEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,13 @@ class AccountViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(child: AccountViewBodySection1()),
+            Center(child: AccountViewBodySection1(userEntity: userEntity)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               child: Divider(thickness: 1, color: Colors.black12),
             ),
             SizedBox(height: 26),
-            AccountViewBodySection2(),
+            AccountViewBodySection2(userEntity: userEntity),
           ],
         ),
       ),

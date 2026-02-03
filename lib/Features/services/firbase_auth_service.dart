@@ -4,9 +4,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:needit_app/core/error/custom_exception.dart';
 
 class FirbaseAuthService {
+  Future deletUser() async {
+    try {
+      await FirebaseAuth.instance.currentUser!.delete();
+    } catch (e) {
+      log('error in FirbaseAuthService of deletUser is $e');
+      throw CustomException('An error occured try again');
+    }
+  }
+
   Future<User> createUserWithEmailAndPassword({
     required String email,
     required String password,
+    required String name,
   }) async {
     try {
       final credential = await FirebaseAuth.instance

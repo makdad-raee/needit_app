@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:needit_app/Features/Account/Presentation/View/Widgets/option_profile.dart';
+import 'package:needit_app/Features/Auth/Domain/entites/user_untity.dart';
 import 'package:needit_app/Features/Profile/Presentation/View/profile_view.dart';
 import 'package:needit_app/constant.dart';
 
 class AccountViewBodySection2 extends StatelessWidget {
-  const AccountViewBodySection2({super.key});
+  const AccountViewBodySection2({super.key, required this.userEntity});
+  final UserEntity userEntity;
 
   @override
   Widget build(BuildContext context) {

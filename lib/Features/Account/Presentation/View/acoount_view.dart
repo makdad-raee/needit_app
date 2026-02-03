@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:needit_app/Features/Account/Presentation/View/Widgets/account_view_body.dart';
+import 'package:needit_app/Features/Auth/Domain/entites/user_untity.dart';
 import 'package:needit_app/constant.dart';
 
 class AccountView extends StatelessWidget {
-  const AccountView({super.key,
-  
-  //  required this.userDetailsEntity
- });
-  // final UserProfileDetailsEntity userDetailsEntity;
+  const AccountView({super.key, required this.userDataEntity});
+  final UserEntity userDataEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,7 @@ class AccountView extends StatelessWidget {
           ],
         ),
       ),
-      body: AccountViewBody(),
+      body: AccountViewBody(userEntity: userDataEntity),
     );
   }
 }

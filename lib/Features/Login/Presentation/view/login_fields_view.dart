@@ -38,17 +38,21 @@ class LoginFieldsView extends StatelessWidget {
           child: SingleChildScrollView(
             child: BlocConsumer<LoginBloc, LoginState>(
               listener: (context, state) {
-                if (state is LoginSuccess) {
+                if (state is LoginSuccessAndGetUserData) {
                   // Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => AccountView()));
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => AccountView(userDataEntity: state.user)),
+                  );
                 }
                 if (state is Loginfailure) {
                   buildErrorBar(context, state.error);
                 }
               },
-              builder: (context, state) => ModalProgressHUD(
-                inAsyncCall: state is LoginLoading ? true : false,
-                child: LoginFieldsBody()),
+              builder:
+                  (context, state) => ModalProgressHUD(
+                    inAsyncCall: state is LoginLoading ? true : false,
+                    child: LoginFieldsBody(),
+                  ),
             ),
           ),
         ),

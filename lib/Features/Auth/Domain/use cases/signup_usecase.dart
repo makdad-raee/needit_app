@@ -6,7 +6,7 @@ import 'package:needit_app/core/error/failure.dart';
 class SignupUpWhithEmilAndpasswordUsecase {
   final AuthRepo authRepo;
   SignupUpWhithEmilAndpasswordUsecase({required this.authRepo});
-  Future<Either<Failure, UserUntity>> call({
+  Future<Either<Failure, UserEntity>> call({
     required String email,
     required String password,
     required name,
