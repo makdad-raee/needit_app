@@ -49,6 +49,7 @@ import 'package:needit_app/Features/product_details/data/data%20source/remote_da
 import 'package:needit_app/Features/product_details/presentation/bloc/details_bloc_bloc.dart';
 import 'package:needit_app/Features/services/firbase_auth_service.dart';
 import 'package:needit_app/Features/services/firestore_service.dart';
+import 'package:needit_app/core/Auth%20Bloc/auth_bloc.dart';
 import 'package:needit_app/core/network/network_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,6 +57,13 @@ final sl = GetIt.instance;
 Future<void> init() async {
   //! Features
   //! bloc
+  sl.registerFactory<AuthBloc>(
+    () => AuthBloc(
+      authRepo: sl.call(),
+      createUserFromFirebaseRepo: sl.call(),
+      loginRepo: sl.call(),
+    ),
+  );
   sl.registerFactory(
     () => ShopBloc(
       getAllMainUseCase: sl.call(),
@@ -122,6 +130,12 @@ Future<void> init() async {
   );
 
   //! repository
+  sl.registerLazySingleton<AuthRepo>(
+    () => AuthRepoImpl(
+      firbaseAuthService: sl.call(),
+      createUserFromFirebaseRepo: sl.call(),
+    ),
+  );
   sl.registerLazySingleton<ShopRepository>(
     () => ShopReposetoriesImpl(
       remoteDataSource: sl.call(),

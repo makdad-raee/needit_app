@@ -69,4 +69,9 @@ class FirbaseAuthService {
       throw CustomException('An error occured try again');
     }
   }
+
+  static bool isUserLoggedIn() {
+    final user = FirebaseAuth.instance.currentUser;
+    return user != null;
+  }
 }

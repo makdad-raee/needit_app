@@ -8,6 +8,8 @@ import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_blo
 import 'package:needit_app/Features/clothes_bags_etc/presentation/bloc/bloc/products_of_category_bloc.dart';
 import 'package:needit_app/Features/product_details/presentation/bloc/details_bloc_bloc.dart';
 import 'package:needit_app/constant.dart';
+import 'package:needit_app/core/Auth%20Bloc/auth_bloc.dart';
+import 'package:needit_app/core/Auth%20Bloc/auth_event.dart';
 import 'package:needit_app/core/NetworkApI/dio_helper.dart';
 import 'package:needit_app/core/utlis/simple_bloc_observer.dart';
 import 'package:needit_app/firebase_options.dart';
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => di.sl<AuthBloc>()..add(AppStarted())),
         BlocProvider(
           create: (context) => di.sl<ShopBloc>()..add(GetAllMainEvent()),
         ),
@@ -47,6 +50,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<CheckoutBloc>()),
       ],
       child: MaterialApp(
+        title: 'Needit App',
         themeMode: ThemeMode.light,
         darkTheme: darkTheme,
 

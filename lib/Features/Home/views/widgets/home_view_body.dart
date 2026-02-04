@@ -29,10 +29,6 @@ class _HomeViewBOdyState extends State<HomeViewBOdy> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        //   WhiteCircles(),
-        // CirclesTopRigeht(),
-        // ImageAndTitel(),
-        // CircleBottomLeft(),
         Center(
           child: Lottie.asset(
             'assets/Logo-6-[remix]_light.json',
@@ -52,38 +48,6 @@ class _HomeViewBOdyState extends State<HomeViewBOdy> {
             },
             fit: BoxFit.fill,
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class WhiteCircles extends StatelessWidget {
-  const WhiteCircles({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          left: 132,
-          top: MediaQuery.of(context).size.height * 0.13,
-          child: const CircleAvatar(radius: 9, backgroundColor: Colors.white),
-        ),
-        Positioned(
-          left: 40,
-          top: MediaQuery.of(context).size.height * 0.23,
-          child: const CircleAvatar(radius: 21, backgroundColor: Colors.white),
-        ),
-        Positioned(
-          right: 50,
-          top: MediaQuery.of(context).size.height * 0.32,
-          child: const CircleAvatar(radius: 9, backgroundColor: Colors.white),
-        ),
-        Positioned(
-          right: 58,
-          bottom: MediaQuery.of(context).size.height * 0.13,
-          child: const CircleAvatar(radius: 21, backgroundColor: Colors.white),
         ),
       ],
     );

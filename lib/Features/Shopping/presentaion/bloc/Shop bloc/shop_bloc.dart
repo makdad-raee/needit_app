@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -29,7 +31,7 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
   }) : super(ShopInitial()) {
     on<ShopEvent>((event, emit) async {
       if (event is GetAllMainEvent) {
-        print('=============GetAllMainEvent==============');
+        log('=============GetAllMainEvent==============');
         emit(ShopLoading());
         final allMAinORFailure = await getAllMainUseCase.call();
         final allPopularORFailure = await getAllPopularUseCase.call();
