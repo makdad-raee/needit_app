@@ -39,7 +39,7 @@ class AuthRepoImpl implements AuthRepo {
               email: email,
             );
             await createUserFromFirebaseRepo.addUserdata(
-              userEntity: resultUserUntity,
+              user: resultUserUntity,
             );
           })
           .catchError((e) {
