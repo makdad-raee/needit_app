@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:needit_app/Features/Account/Presentation/View/acoount_view.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/views/my_cart.dart';
+import 'package:needit_app/Features/Auth/Domain/entites/user_untity.dart';
 import 'package:needit_app/Features/Login/Presentation/view/login_view.dart';
 import 'package:needit_app/Features/Orders/Presentation/View/order_view.dart';
 import 'package:needit_app/Features/Shopping/view/widgets/home_view_shop.dart';
 import 'package:needit_app/constant.dart';
+import 'package:needit_app/core/Auth%20Bloc/auth_bloc.dart';
+import 'package:needit_app/core/Auth%20Bloc/auth_state.dart';
 
 class ShoppingView extends StatefulWidget {
   const ShoppingView({super.key});
@@ -14,54 +19,67 @@ class ShoppingView extends StatefulWidget {
 
 class _ShoppingViewState extends State<ShoppingView> {
   int currentIndex = 0;
-  List<Widget> screens = const [
-    HomeViewShop(),
-    MyCartView(),
-    OrderView(),
-    LoginView(),
-    // AccountView(),
-  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-        child: Container(
-          height: 60,
-          decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(color: Colors.black12, spreadRadius: 1, blurRadius: 3),
-            ],
-            border: const Border(
-              top: BorderSide(width: 0.5, color: Colors.white),
-              right: BorderSide(width: 0.5, color: Colors.white),
-              left: BorderSide(width: 0.5, color: Colors.white),
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        UserEntity? user;
+        if (state is AuthAuthenticated) {
+          user = state.user;
+        }
+        List<Widget> screens = [
+          const HomeViewShop(),
+          const MyCartView(),
+          const OrderView(),
+          user != null ? AccountView(userDataEntity: user) : const LoginView(),
+          // AccountView(),
+        ];
+        return Scaffold(
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                  ),
+                ],
+                border: const Border(
+                  top: BorderSide(width: 0.5, color: Colors.white),
+                  right: BorderSide(width: 0.5, color: Colors.white),
+                  left: BorderSide(width: 0.5, color: Colors.white),
+                ),
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.white,
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+                child: BottomNavigationBar(
+                  selectedLabelStyle: const TextStyle(fontSize: 12),
+                  type: BottomNavigationBarType.fixed,
+                  elevation: 0,
+                  unselectedItemColor: Colors.black38,
+                  selectedItemColor: Theme.of(context).primaryColor,
+                  currentIndex: currentIndex,
+                  onTap: (value) {
+                    currentIndex = value;
+                    setState(() {});
+                  },
+                  items: bottomNavigationBarItems(context),
+                ),
+              ),
             ),
-            borderRadius: BorderRadius.circular(30),
-            color: Colors.white,
           ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
-            child: BottomNavigationBar(
-              selectedLabelStyle: const TextStyle(fontSize: 12),
-              type: BottomNavigationBarType.fixed,
-              elevation: 0,
-              unselectedItemColor: Colors.black38,
-              selectedItemColor: Theme.of(context).primaryColor,
-              currentIndex: currentIndex,
-              onTap: (value) {
-                currentIndex = value;
-                setState(() {});
-              },
-              items: bottomNavigationBarItems(context),
-            ),
-          ),
-        ),
-      ),
-      body: screens[currentIndex],
+          body: screens[currentIndex],
+        );
+      },
     );
   }
 }

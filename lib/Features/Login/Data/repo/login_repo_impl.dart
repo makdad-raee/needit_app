@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:needit_app/Features/Account/Domain/repos/create_user_from_firebase_repo.dart';
-import 'package:needit_app/Features/Auth/Data/models/user_model.dart';
 import 'package:needit_app/Features/Auth/Domain/entites/user_untity.dart';
 import 'package:needit_app/Features/Login/Domain/Repos/login_repo.dart';
 import 'package:needit_app/Features/services/firbase_auth_service.dart';

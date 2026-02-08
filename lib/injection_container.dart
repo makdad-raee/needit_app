@@ -132,7 +132,7 @@ Future<void> init() async {
   //! repository
   sl.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
-      firbaseAuthService: sl.call(),
+      firbaseAuthService: FirbaseAuthService(),
       createUserFromFirebaseRepo: sl.call(),
     ),
   );
@@ -196,17 +196,10 @@ Future<void> init() async {
   sl.registerLazySingleton<CheckoutRemoteDataSource>(
     () => CheckoutRemoteDataSourceImpl(),
   );
-  sl.registerLazySingleton(() => FirestorService());
-  sl.registerLazySingleton<AuthRepo>(
-    () => AuthRepoImpl(
-      firbaseAuthService: FirbaseAuthService(),
-      createUserFromFirebaseRepo: CreateUserFromFirebaseRepoImpl(
-        firestorService: sl.call(),
-      ),
-    ),
-  );
+  sl.registerLazySingleton<FirestorService>(() => FirestorService());
+
   sl.registerLazySingleton<CreateUserFromFirebaseRepo>(
-    () => CreateUserFromFirebaseRepoImpl(firestorService: FirestorService()),
+    () => CreateUserFromFirebaseRepoImpl(firestorService: sl.call()),
   );
 
   //! core
