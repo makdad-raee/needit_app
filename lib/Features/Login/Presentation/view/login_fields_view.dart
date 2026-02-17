@@ -41,7 +41,10 @@ class LoginFieldsView extends StatelessWidget {
                 if (state is LoginSuccessAndGetUserData) {
                   // Navigator.of(context).pop();
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => AccountView(userDataEntity: state.user)),
+                    MaterialPageRoute(
+                      builder:
+                          (context) => AccountView(userDataEntity: state.user),
+                    ),
                   );
                 }
                 if (state is Loginfailure) {

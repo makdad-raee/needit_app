@@ -48,14 +48,6 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
         if (allMAinORFailure.isRight()) {
           emit(
             ShopLoaded(
-              // bags: allBagsORFailure.getOrElse(() => []),
-              // jwelry: allJwelryORFailure.getOrElse(() => []),
-              // kitchen: allKitchenORFailure.getOrElse(() => []),
-              // shoes: allShoesORFailure.getOrElse(() => []),
-              // toys: allToysORFailure.getOrElse(() => []),
-              // watch: allWatchORFailure.getOrElse(() => []),
-              // electronics: allElectronicsORFailure.getOrElse(() => []),
-              // clothes: allClothesORFailure.getOrElse(() => []),
               offer: alloffersorFailure.getOrElse(() => []),
               popular: allPopularORFailure.getOrElse(() => []),
               main: allMAinORFailure.getOrElse(() => []),
