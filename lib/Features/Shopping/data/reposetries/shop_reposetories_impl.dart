@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/developer.dart' show log;
+
 import 'package:dartz/dartz.dart';
 import 'package:needit_app/Features/Shopping/data/data%20source/shop_local_data_source.dart';
 import 'package:needit_app/Features/Shopping/data/data%20source/shop_remote_data_source.dart';
@@ -23,14 +25,14 @@ class ShopReposetoriesImpl implements ShopRepository {
   @override
   Future<Either<Failure, List<MainEntity>>> getAllMain() async {
     if (await networkInfo.isConnected) {
-      print('==========isConnected......');
+      log('==========isConnected......');
       try {
         final main = await remoteDataSource.getAllMain();
         localDataSource.cachedMain(main);
         return right(main);
       } on ServerException {
-        print('==========isooooooooooooooooooo......');
-        return left(ServerFaliure(message: 'ServerFaliure'));
+        log('==========is ServerFaliure......');
+        return left(ServerFailure(message: 'ServerFaliure'));
       }
     } else {
       try {
@@ -50,7 +52,7 @@ class ShopReposetoriesImpl implements ShopRepository {
         localDataSource.cachedOffer(offer);
         return right(offer);
       } on ServerException {
-        return left(ServerFaliure(message: 'ServerFaliure'));
+        return left(ServerFailure(message: 'ServerFaliure'));
       }
     } else {
       try {
@@ -70,7 +72,7 @@ class ShopReposetoriesImpl implements ShopRepository {
         localDataSource.cachesPopular(popular);
         return right(popular);
       } on ServerException {
-        return left(ServerFaliure(message: 'ServerFaliure'));
+        return left(ServerFailure(message: 'ServerFaliure'));
       }
     } else {
       try {
@@ -96,7 +98,7 @@ class ShopReposetoriesImpl implements ShopRepository {
         );
         return right(productsOfCategory);
       } on ServerException {
-        return left(ServerFaliure(message: 'ServerFaliure'));
+        return left(ServerFailure(message: 'ServerFaliure'));
       }
     } else {
       try {

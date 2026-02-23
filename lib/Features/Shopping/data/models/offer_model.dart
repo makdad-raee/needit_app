@@ -1,11 +1,11 @@
 import 'package:needit_app/Features/Shopping/domain/Entities/offer_entity.dart';
-import 'package:needit_app/Features/Shopping/domain/Entities/product_entity.dart';
+import 'package:needit_app/Features/Shopping/domain/Entities/product_entity_old.dart';
 
 class OfferModel extends OfferEntity {
   const OfferModel({required super.productEntity});
   factory OfferModel.fromJson(Map<String, dynamic> json) {
     return OfferModel(
-      productEntity: ProductEntity(
+      productEntity: ProductEntityOld(
         id: json['id'],
         key: json['key'],
         name: json['name'],

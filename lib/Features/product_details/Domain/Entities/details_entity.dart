@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:needit_app/Features/Shopping/domain/Entities/product_entity.dart';
+import 'package:needit_app/Features/Shopping/domain/Entities/product_entity_old.dart';
 import 'package:needit_app/Features/product_details/Domain/Entities/colors_entity.dart';
 import 'package:needit_app/Features/product_details/Domain/Entities/sizes_entity.dart';
 
@@ -11,7 +11,7 @@ class DetailsEntity extends Equatable {
   final dynamic price;
   final dynamic rate;
   final dynamic totalSold;
-  final ProductEntity? category;
+  final ProductEntityOld? category;
   final List<ColorEntity>? colors;
   final List<SizesEntity>? sizes;
 

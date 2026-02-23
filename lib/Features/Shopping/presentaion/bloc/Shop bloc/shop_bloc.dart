@@ -192,7 +192,7 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
   }
   String mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
-      case ServerFaliure:
+      case ServerFailure:
         return serverFaliureMessage;
       case OfflineFaliure:
         return offlineFaliureMessage;

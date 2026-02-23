@@ -55,13 +55,13 @@ class AuthRepoImpl implements AuthRepo {
         await firbaseAuthService.deletUser();
       }
       log('error in authrepoimpl of createUserWithEmailAndPassword is $e');
-      return left(ServerFaliure(message: e.message));
+      return left(ServerFailure(message: e.message));
     } catch (e) {
       if (user != null) {
         await firbaseAuthService.deletUser();
       }
       log('error in authrepoimpl of createUserWithEmailAndPassword is $e');
-      return left(ServerFaliure(message: 'An error occured try again '));
+      return left(ServerFailure(message: 'An error occured try again '));
     }
   }
 }

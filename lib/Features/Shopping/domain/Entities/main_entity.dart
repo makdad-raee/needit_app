@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:needit_app/Features/Shopping/domain/Entities/product_entity.dart';
+import 'package:needit_app/Features/Shopping/domain/Entities/product_entity_old.dart';
 
 class MainEntity extends Equatable {
-  final ProductEntity productEntity;
+  final ProductEntityOld productEntity;
 
   const MainEntity({required this.productEntity});
 

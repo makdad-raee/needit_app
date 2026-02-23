@@ -13,8 +13,8 @@ class OfflineFaliure extends Failure {
   List<Object?> get props => [];
 }
 
-class ServerFaliure extends Failure {
-  const ServerFaliure({required super.message});
+class ServerFailure extends Failure {
+  const ServerFailure({required super.message});
 
   @override
   List<Object?> get props => [];

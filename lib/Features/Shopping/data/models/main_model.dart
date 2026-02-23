@@ -1,11 +1,11 @@
 import 'package:needit_app/Features/Shopping/domain/Entities/main_entity.dart';
-import 'package:needit_app/Features/Shopping/domain/Entities/product_entity.dart';
+import 'package:needit_app/Features/Shopping/domain/Entities/product_entity_old.dart';
 
 class MainModel extends MainEntity {
   const MainModel({required super.productEntity});
   factory MainModel.fromJson(Map<String, dynamic> json) {
     return MainModel(
-      productEntity: ProductEntity(
+      productEntity: ProductEntityOld(
         id: json['id'],
         key: json['key'],
         name: json['name'],

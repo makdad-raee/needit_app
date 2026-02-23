@@ -27,7 +27,7 @@ class DetailsRepoImpl implements DetailsReposotory {
         localDataSource.cashedDetails(details);
         return right(details);
       } on ServerException {
-        return left(ServerFaliure(message: 'ServerFaliure'));
+        return left(ServerFailure(message: 'ServerFaliure'));
       }
     } else {
       try {

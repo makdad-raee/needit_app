@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:needit_app/Features/Notification/Presentation/views/notifications_view.dart';
+import 'package:needit_app/Features/location/presentation/location_view.dart';
 import 'package:needit_app/constant.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -9,7 +10,14 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Icon(Icons.location_on_outlined, size: 24),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const LocationView()),
+            );
+          },
+          child: const Icon(Icons.location_on_outlined, size: 24),
+        ),
         Text(
           'Syria-Aleppo',
           style: Theme.of(context).textTheme.bodySmall!.copyWith(

@@ -23,7 +23,7 @@ class AddPromoRepoImpl implements AddPromoRepo {
       );
       return Future.value(right(unit));
     } catch (e) {
-      return Future.value(left(ServerFaliure(message: 'ServerFaliure')));
+      return Future.value(left(ServerFailure(message: 'ServerFaliure')));
     }
   }
 }

@@ -9,6 +9,8 @@ import 'package:needit_app/Features/product_details/presentation/bloc/details_bl
 import 'package:needit_app/constant.dart';
 import 'package:needit_app/core/Auth%20Bloc/auth_bloc.dart';
 import 'package:needit_app/core/Auth%20Bloc/auth_event.dart';
+import 'package:needit_app/core/get_products/presentation/bloc/get_products_bloc.dart';
+import 'package:needit_app/core/get_products/presentation/bloc/get_products_event.dart';
 import 'injection_container.dart' as di;
 
 class RootApp extends StatelessWidget {
@@ -19,6 +21,11 @@ class RootApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => di.sl<AuthBloc>()..add(AppStarted())),
+        BlocProvider(
+          create:
+              (context) =>
+                  di.sl<GetProductsBloc>()..add(GetProductsEventStarted()),
+        ),
         BlocProvider(
           create: (context) => di.sl<ShopBloc>()..add(GetAllMainEvent()),
         ),

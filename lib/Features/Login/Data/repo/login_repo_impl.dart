@@ -33,10 +33,10 @@ class LoginRepoImpl implements LoginRepo {
       log(
         'error in CustomException loginrepoimpl of loginWithEmailAndPassword is $e',
       );
-      return left(ServerFaliure(message: e.toString()));
+      return left(ServerFailure(message: e.toString()));
     } catch (e) {
       log('error in loginrepoimpl of loginWithEmailAndPassword is $e');
-      return left(ServerFaliure(message: e.toString()));
+      return left(ServerFailure(message: e.toString()));
     }
   }
 

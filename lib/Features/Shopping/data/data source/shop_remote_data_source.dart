@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:needit_app/Features/Shopping/data/models/main_model.dart';
 import 'package:needit_app/Features/Shopping/data/models/offer_model.dart';
@@ -29,11 +30,11 @@ class ShopRemoteDataSourceIml implements ShopRemoteDataSource {
     if (response.statusCode == 200) {
       final datamainJson = response;
       final decodeDataJson = json.decode(datamainJson.toString());
-      print(decodeDataJson);
+      log(decodeDataJson);
       List decodeMainJsonData = decodeDataJson['data']['MAIN'];
-      print('4444444444444444444444444');
+      log('4444444444444444444444444');
       print(decodeMainJsonData);
-      print('===========decode json Length=========');
+      log('===========decode json Length=========');
       // final List<Map<String, dynamic>> decodeMainJson =
       //     json.decode(datamainJson) as List<Map<String, dynamic>>;
 

@@ -47,9 +47,14 @@ import 'package:needit_app/Features/product_details/data/Repositories/details_re
 import 'package:needit_app/Features/product_details/data/data%20source/local_data_source.dart';
 import 'package:needit_app/Features/product_details/data/data%20source/remote_data_source.dart';
 import 'package:needit_app/Features/product_details/presentation/bloc/details_bloc_bloc.dart';
+import 'package:needit_app/Features/services/database_service.dart';
 import 'package:needit_app/Features/services/firbase_auth_service.dart';
 import 'package:needit_app/Features/services/firestore_service.dart';
 import 'package:needit_app/core/Auth%20Bloc/auth_bloc.dart';
+import 'package:needit_app/core/get_products/Domain/repos/product_repo.dart';
+import 'package:needit_app/core/get_products/Domain/repos/products_repo_impl.dart';
+import 'package:needit_app/core/get_products/Domain/usecase/get_products_use_case.dart';
+import 'package:needit_app/core/get_products/presentation/bloc/get_products_bloc.dart';
 import 'package:needit_app/core/network/network_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -64,6 +69,7 @@ Future<void> init() async {
       loginRepo: sl.call(),
     ),
   );
+  sl.registerFactory(() => GetProductsBloc(getProductsUseCase: sl.call()));
   sl.registerFactory(
     () => ShopBloc(
       getAllMainUseCase: sl.call(),
@@ -128,6 +134,7 @@ Future<void> init() async {
   sl.registerLazySingleton<LoginWhithEmilAndpasswordUsecase>(
     () => LoginWhithEmilAndpasswordUsecase(loginRepo: sl.call()),
   );
+  sl.registerLazySingleton(() => GetProductsUseCase(productRepo: sl.call()));
 
   //! repository
   sl.registerLazySingleton<AuthRepo>(
@@ -172,6 +179,9 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => AddShippingTypeRepoImpl(checkoutRemoteDataSource: sl.call()),
   );
+  sl.registerLazySingleton<ProductRepo>(
+    () => ProductsRepoImpl(dataBaseService: sl.call()),
+  );
   //! data source
   sl.registerLazySingleton<ShopLocalDataSource>(
     () => ShopLocalDataSourceImpl(sharedPreferences: sl.call()),
@@ -197,6 +207,7 @@ Future<void> init() async {
     () => CheckoutRemoteDataSourceImpl(),
   );
   sl.registerLazySingleton<FirestorService>(() => FirestorService());
+  sl.registerLazySingleton<DataBaseService>(() => FirestorService());
 
   sl.registerLazySingleton<CreateUserFromFirebaseRepo>(
     () => CreateUserFromFirebaseRepoImpl(firestorService: sl.call()),

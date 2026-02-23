@@ -1,6 +1,6 @@
-import 'package:needit_app/Features/Shopping/domain/Entities/product_entity.dart';
+import 'package:needit_app/Features/Shopping/domain/Entities/product_entity_old.dart';
 
-class CategoryModel extends ProductEntity {
+class CategoryModel extends ProductEntityOld {
   const CategoryModel({
     required super.id,
     required super.key,

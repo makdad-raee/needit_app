@@ -1,12 +1,12 @@
 import 'package:needit_app/Features/Shopping/domain/Entities/popular_entity.dart';
-import 'package:needit_app/Features/Shopping/domain/Entities/product_entity.dart';
+import 'package:needit_app/Features/Shopping/domain/Entities/product_entity_old.dart';
 
 class PopularModel extends PopularEntity {
   const PopularModel({required super.productEntity});
 
   factory PopularModel.fromJson(Map<String, dynamic> json) {
     return PopularModel(
-      productEntity: ProductEntity(
+      productEntity: ProductEntityOld(
         id: json['id'],
         key: json['key'],
         name: json['name'],

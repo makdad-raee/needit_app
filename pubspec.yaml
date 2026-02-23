@@ -1,6 +1,6 @@
 name: needit_app
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -22,7 +22,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   dartz: ^0.10.1
   equatable: ^2.0.5
-  
+
   # مكتبات الواجهة والرسوميات
   smooth_page_indicator: ^1.2.0
   font_awesome_flutter: ^10.7.0
@@ -46,6 +46,7 @@ flutter:
 
   # إعدادات ملفات الـ Assets
   assets:
+    - .env
     - assets/images/
     - assets/home_categories_response.json
     - assets/Logo-6-[remix].json
