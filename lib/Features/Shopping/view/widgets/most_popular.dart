@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:needit_app/Features/Shopping/models/categories/popular.dart';
-import 'package:needit_app/Features/Shopping/view/widgets/goods_for_sale_first_look.dart';
+import 'package:needit_app/Features/Shopping/view/widgets/custom_sliver_grid_goods.dart';
+
 import 'package:needit_app/constant.dart';
-import 'package:needit_app/core/manger/cubit/Main%20cubit/main_view_cubit.dart';
-import 'package:needit_app/core/manger/cubit/Main%20cubit/main_view_state.dart';
+import 'package:needit_app/core/get_products/Domain/entity/product_entity.dart';
 
 class MostPopular extends StatefulWidget {
-  const MostPopular({super.key});
+  const MostPopular({super.key, required this.allProducts});
+  final List<ProductEntity> allProducts;
 
   @override
   State<MostPopular> createState() => _MostPopularState();
@@ -26,48 +25,111 @@ class _MostPopularState extends State<MostPopular>
   @override
   Widget build(BuildContext context) {
     //TabController tabController = TabController(length: 5, vsync: this);
-    return BlocConsumer<MainViewCubit, MainViewState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        var allPopularcubit = MainViewCubit.get(context).allPopular;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Most Popular', style: ktextStyle18),
-            const SizedBox(height: 12),
-            Container(
-              child: TabBarMostPopular(
-                tabController: tabController,
-                allPopularcubit: allPopularcubit,
-              ),
-            ),
-            SizedBox(
-              width: double.maxFinite,
-              height: 900,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // const Text('Most Popular', style: ktextStyle18),
+          // const SizedBox(height: 12),
+          TabBarMostPopular(
+            tabController: tabController,
+            allPopularcubit: widget.allProducts,
+          ),
+          SizedBox(
+            height:
+                300, // حدد ارتفاعاً مناسباً أو استخدم Expanded إذا كنت داخل Column رئيسي
+            child: Expanded(
               child: TabBarView(
-                physics: const BouncingScrollPhysics(),
                 controller: tabController,
-                children: const [
-                  GoodsForSale(),
-                  Text(
-                    'Clothes dddddddddddddddddddddddddddd',
-                    style: TextStyle(color: Colors.black),
+                children: [
+                  // 1. All - تعرض كل المنتجات بدون استثناء
+                  _buildProductsGrid(widget.allProducts),
+
+                  // 2. clothes - فلترة حسب النص الذي خزنته في قاعدة البيانات
+                  _buildProductsGrid(
+                    widget.allProducts
+                        .where((p) => p.categoryID == 'Clothes')
+                        .toList(),
                   ),
-                  Text('elec', style: TextStyle(color: Colors.black)),
-                  Text('bags', style: TextStyle(color: Colors.black)),
-                  Text('toys', style: TextStyle(color: Colors.black)),
-                  Text('jewelry', style: TextStyle(color: Colors.black)),
-                  Text('kitchen', style: TextStyle(color: Colors.black)),
-                  Text('watch', style: TextStyle(color: Colors.black)),
-                  Text('Shoes', style: TextStyle(color: Colors.black)),
+
+                  // 3. shoes
+                  _buildProductsGrid(
+                    widget.allProducts
+                        .where((p) => p.categoryID == 'Shoes')
+                        .toList(),
+                  ),
+
+                  // 4. bags
+                  _buildProductsGrid(
+                    widget.allProducts
+                        .where((p) => p.categoryID == 'Bags')
+                        .toList(),
+                  ),
+
+                  // 5. watches
+                  _buildProductsGrid(
+                    widget.allProducts
+                        .where((p) => p.categoryID == 'Watches')
+                        .toList(),
+                  ),
+
+                  // 6. jewelry
+                  _buildProductsGrid(
+                    widget.allProducts
+                        .where((p) => p.categoryID == 'Jewelry')
+                        .toList(),
+                  ),
+
+                  // 7. toys
+                  _buildProductsGrid(
+                    widget.allProducts
+                        .where((p) => p.categoryID == 'Toys')
+                        .toList(),
+                  ),
+
+                  // 8. kitchen
+                  _buildProductsGrid(
+                    widget.allProducts
+                        .where((p) => p.categoryID == 'Kitchen')
+                        .toList(),
+                  ),
+
+                  // 9. electronic
+                  _buildProductsGrid(
+                    widget.allProducts
+                        .where((p) => p.categoryID == 'Electronics')
+                        .toList(),
+                  ),
                 ],
               ),
             ),
-          ],
-        );
-      },
+          ),
+        ],
+      ),
     );
   }
+}
+
+// ويدجيت موحدة لبناء التبويب لمنع التكرار
+Widget buildTabItem(String label) {
+  return Tab(
+    child: Container(
+      height: 28,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        border: Border.all(color: kprimaryColor),
+
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Center(
+        child: Text(
+          label,
+          style: const TextStyle(color: Colors.black, fontSize: 12),
+        ),
+      ),
+    ),
+  );
 }
 
 class TabBarMostPopular extends StatelessWidget {
@@ -78,185 +140,50 @@ class TabBarMostPopular extends StatelessWidget {
   });
 
   final TabController tabController;
-  final List<Popular> allPopularcubit;
+  final List<ProductEntity> allPopularcubit;
 
   @override
   Widget build(BuildContext context) {
     return TabBar(
       padding: const EdgeInsets.all(0),
       controller: tabController,
+
       isScrollable: true,
+
       tabAlignment: TabAlignment.start,
       labelPadding: const EdgeInsets.only(right: 14),
+      labelColor: kprimaryColor,
+      unselectedLabelColor: Colors.white,
+      indicator: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: Colors.yellow, // اللون الأصفر عند الضغط
+      ),
       tabs: [
-        Tab(
-          child: Container(
-            height: 28,
-            width: 64,
-            //   padding: EdgeInsetsDirectional.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadiusDirectional.circular(18),
-            ),
-            child: const Center(
-              child: Text('All', style: TextStyle(color: Colors.white)),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            height: 28,
-            width: 64,
-            //   padding: EdgeInsetsDirectional.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadiusDirectional.circular(18),
-            ),
-            child: Center(
-              child: Text(
-                allPopularcubit.where((element) => element.id == 8).first.name!,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            height: 28,
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: 8),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadiusDirectional.circular(18),
-            ),
-            child: Center(
-              child: Text(
-                allPopularcubit.where((element) => element.id == 9).first.name!,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            height: 28,
-            width: 64,
-            //   padding: EdgeInsetsDirectional.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadiusDirectional.circular(18),
-            ),
-            child: Center(
-              child: Text(
-                allPopularcubit
-                    .where((element) => element.id == 10)
-                    .first
-                    .name!,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            height: 28,
-            width: 64,
-            //   padding: EdgeInsetsDirectional.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadiusDirectional.circular(18),
-            ),
-            child: Center(
-              child: Text(
-                allPopularcubit
-                    .where((element) => element.id == 11)
-                    .first
-                    .name!,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            height: 28,
-            width: 64,
-            //   padding: EdgeInsetsDirectional.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadiusDirectional.circular(18),
-            ),
-            child: Center(
-              child: Text(
-                allPopularcubit
-                    .where((element) => element.id == 12)
-                    .first
-                    .name!,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            height: 28,
-            width: 64,
-            //   padding: EdgeInsetsDirectional.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadiusDirectional.circular(18),
-            ),
-            child: Center(
-              child: Text(
-                allPopularcubit
-                    .where((element) => element.id == 13)
-                    .first
-                    .name!,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            height: 28,
-            width: 64,
-            //   padding: EdgeInsetsDirectional.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadiusDirectional.circular(18),
-            ),
-            child: Center(
-              child: Text(
-                allPopularcubit
-                    .where((element) => element.id == 14)
-                    .first
-                    .name!,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
-        Tab(
-          child: Container(
-            height: 28,
-            width: 64,
-            //   padding: EdgeInsetsDirectional.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadiusDirectional.circular(18),
-            ),
-            child: Center(
-              child: Text(
-                allPopularcubit
-                    .where((element) => element.id == 15)
-                    .first
-                    .name!,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
+        buildTabItem('All'),
+        buildTabItem('clothes'),
+        buildTabItem('shoes'),
+        buildTabItem('bags'),
+        buildTabItem('watches'),
+        buildTabItem('jewelry'),
+        buildTabItem('toys'),
+        buildTabItem('kitchen'),
+        buildTabItem('electronic'),
       ],
     );
   }
+}
+
+Widget _buildProductsGrid(List<ProductEntity> products) {
+  if (products.isEmpty) {
+    return const Center(child: Text("No products found in this category"));
+  } else {
+    return CustomScrollView(
+      key: PageStorageKey(products.hashCode),
+      slivers: [CustomSliverGridGoods(products: products)],
+    );
+  }
+}
+
+List getCateList({required int imortantindex}) {
+  return [];
 }

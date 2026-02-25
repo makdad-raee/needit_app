@@ -5,12 +5,12 @@ import 'package:needit_app/Features/Shopping/domain/Entities/offer_entity.dart';
 import 'package:needit_app/Features/Shopping/domain/Entities/popular_entity.dart';
 import 'package:needit_app/Features/Shopping/domain/Entities/product_entity_category.dart';
 import 'package:needit_app/Features/Shopping/view/widgets/custom_appbar.dart';
-import 'package:needit_app/Features/Shopping/view/widgets/custom_sliver_grid_goods.dart';
-import 'package:needit_app/Features/Shopping/view/widgets/list_of_containers.dart';
+import 'package:needit_app/Features/Shopping/view/widgets/most_popular.dart';
 import 'package:needit_app/Features/Shopping/view/widgets/offers_and_grid_view_circles_avatar.dart';
-import 'package:needit_app/Features/clothes_bags_etc/presentation/bloc/bloc/products_of_category_bloc.dart';
 import 'package:needit_app/Features/search/presentation/views/widgets/search_place.dart';
 import 'package:needit_app/constant.dart';
+import 'package:needit_app/core/get_products/presentation/bloc/get_products_bloc.dart';
+import 'package:needit_app/core/get_products/presentation/bloc/get_products_bloc_state.dart';
 import 'package:needit_app/core/widgets/loading_widgets.dart';
 
 class HomeViewBodyShop extends StatelessWidget {
@@ -105,51 +105,34 @@ class HomeViewBodyShop extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 18),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: ListOfContainers(popularEntity: popularS),
+                      // const SizedBox(height: 18),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                      //   child: ListOfContainers(popularEntity: popularS),
+                      // ),
+                      BlocConsumer<GetProductsBloc, GetProductsState>(
+                        listener: (context, state) {},
+                        builder: (context, state) {
+                          if (state is GetProductsLoading) {
+                            return const LoadingWidgets();
+                          }
+                          if (state is GetProductsSuccessState) {
+                            return MostPopular(allProducts: state.products);
+                          }
+                          if (state is GetProductsErrorState) {
+                            return const Center(
+                              child: Text('No data please try again later'),
+                            );
+                          }
+                          return const LoadingWidgets();
+                        },
                       ),
-                      const SizedBox(height: 20),
+                      // const SizedBox(height: 20),
                     ],
                   ),
                 ],
               ),
             ),
-
-            BlocConsumer<ProductsOfCategoryBloc, ProductsOfCategoryState>(
-              listener: (context, state) {},
-              builder: (context, state) {
-                if (state is ProductsOfCategoryLoadingState) {
-                  return const SliverToBoxAdapter(child: LoadingWidgets());
-                } else if (state is ProductsOfCategoryLoadedState) {
-                  return CustomSliverGridGoods(
-                    bags: state.productsOfCategory,
-                    clothes: state.productsOfCategory,
-                    electronic: state.productsOfCategory,
-                    jewelry: state.productsOfCategory,
-                    kitchen: state.productsOfCategory,
-                    watch: state.productsOfCategory,
-                    shoes: state.productsOfCategory,
-                    toys: state.productsOfCategory,
-                    // bags: value,
-                    // clothes: value,
-                    // electronic: value,
-                    // jewelry: value,
-                    // kitchen: value,
-                    // watch: value,
-                    // shoes: value,
-                    // toys: value,
-                  );
-                } else if (state is ProductsOfCategoryErrorState) {
-                  return const SliverToBoxAdapter(
-                    child: Center(child: Text('No data')),
-                  );
-                }
-                return const SliverToBoxAdapter(child: LoadingWidgets());
-              },
-            ),
-            //   ),
           ],
         ),
       ),

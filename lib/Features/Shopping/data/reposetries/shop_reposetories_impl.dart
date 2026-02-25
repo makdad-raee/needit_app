@@ -1,4 +1,4 @@
-import 'dart:nativewrappers/_internal/vm/lib/developer.dart' show log;
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:needit_app/Features/Shopping/data/data%20source/shop_local_data_source.dart';

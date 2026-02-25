@@ -1,42 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:needit_app/Features/Shopping/domain/Entities/product_entity_category.dart';
-import 'package:needit_app/Features/product_details/views/produst_details.dart';
+
 import 'package:needit_app/constant.dart';
+import 'package:needit_app/core/get_products/Domain/entity/product_entity.dart';
 
 class CustomSliverGridGoods extends StatelessWidget {
-  const CustomSliverGridGoods({
-    super.key,
-    required this.clothes,
-    required this.toys,
-    required this.watch,
-    required this.kitchen,
-    required this.shoes,
-    required this.jewelry,
-    required this.bags,
-    required this.electronic,
-  });
-  final List<ProductEntityCategory> clothes;
-  final List<ProductEntityCategory> toys;
-  final List<ProductEntityCategory> watch;
-  final List<ProductEntityCategory> kitchen;
-  final List<ProductEntityCategory> shoes;
-  final List<ProductEntityCategory> jewelry;
-  final List<ProductEntityCategory> bags;
-  final List<ProductEntityCategory> electronic;
-  //final DetailsEntity details;
+  const CustomSliverGridGoods({super.key, required this.products});
+  final List<ProductEntity> products;
 
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       sliver: SliverGrid.builder(
-        itemCount: 3,
+        itemCount: products.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 8,
+          crossAxisSpacing: 10,
           mainAxisSpacing: 2,
-          childAspectRatio: 0.7,
+          childAspectRatio: 0.65,
         ),
         itemBuilder: (context, index) {
           return ValueListenableBuilder(
@@ -44,17 +26,17 @@ class CustomSliverGridGoods extends StatelessWidget {
             builder:
                 (context, value, child) => GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder:
-                            (context) => ProductDetailsView(
-                              id:
-                                  getCateList(
-                                    imortantindex: value.toInt(),
-                                  )[index].id,
-                            ),
-                      ),
-                    );
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder:
+                    //         (context) => ProductDetailsView(
+                    //           id:
+                    //               getCateList(
+                    //                 imortantindex: value.toInt(),
+                    //               )[index].id,
+                    //         ),
+                    //   ),
+                    // );
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -83,21 +65,16 @@ class CustomSliverGridGoods extends StatelessWidget {
                             child: CachedNetworkImage(
                               fit: BoxFit.cover,
                               imageUrl:
-                                  // fit: BoxFit.contain,
-                                  getCateList(
-                                    imortantindex: value.toInt(),
-                                  )[index].imageUrl ??
-                                  'https://img.freepik.com/free-photo/forklift-boxes-arrangement_23-2149853118.jpg?t=st=1723569462~exp=1723573062~hmac=db877b441335a64500852f42152f9220ad73c496720648342b8bb2130bccbafa&w=740',
+                                  "https://img.freepik.com/free-photo/forklift-boxes-arrangement_23-2149853118.jpg?t=st=1723569462~exp=1723573062~hmac=db877b441335a64500852f42152f9220ad73c496720648342b8bb2130bccbafa&w=740",
+
+                              // fit: BoxFit.contain,
                             ),
                           ),
                         ),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Text(
-                            getCateList(
-                                  imortantindex: value.toInt(),
-                                )[index].name ??
-                                'hoooo',
+                            'hoooo',
                             style: Theme.of(
                               context,
                             ).textTheme.bodyMedium!.copyWith(
@@ -112,9 +89,7 @@ class CustomSliverGridGoods extends StatelessWidget {
                           children: [
                             const Icon(Icons.star_half),
                             Text(
-                              getCateList(
-                                imortantindex: value.toInt().toInt(),
-                              )[index].rate.toString(),
+                              "4.5",
                               style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w300,
@@ -147,7 +122,7 @@ class CustomSliverGridGoods extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          '${getCateList(imortantindex: value.toInt())[index].totalSold} \$',
+                          '33\$',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: Theme.of(
@@ -167,24 +142,24 @@ class CustomSliverGridGoods extends StatelessWidget {
     );
   }
 
-  List getCateList({required int imortantindex}) {
-    if (imortantindex == 1) {
-      return clothes;
-    } else if (imortantindex == 2) {
-      return electronic;
-    } else if (imortantindex == 3) {
-      return bags ?? [];
-    } else if (imortantindex == 4) {
-      return toys;
-    } else if (imortantindex == 5) {
-      return jewelry;
-    } else if (imortantindex == 6) {
-      return kitchen;
-    } else if (imortantindex == 7) {
-      return watch;
-    } else if (imortantindex == 7) {
-      return shoes;
-    }
-    return clothes;
-  }
+  // List getCateList({required int imortantindex}) {
+  //   if (imortantindex == 1) {
+  //     return clothes;
+  //   } else if (imortantindex == 2) {
+  //     return electronic;
+  //   } else if (imortantindex == 3) {
+  //     return bags ?? [];
+  //   } else if (imortantindex == 4) {
+  //     return toys;
+  //   } else if (imortantindex == 5) {
+  //     return jewelry;
+  //   } else if (imortantindex == 6) {
+  //     return kitchen;
+  //   } else if (imortantindex == 7) {
+  //     return watch;
+  //   } else if (imortantindex == 7) {
+  //     return shoes;
+  //   }
+  //   return clothes;
+  // }
 }

@@ -30,7 +30,7 @@ class ShopRemoteDataSourceIml implements ShopRemoteDataSource {
     if (response.statusCode == 200) {
       final datamainJson = response;
       final decodeDataJson = json.decode(datamainJson.toString());
-      log(decodeDataJson);
+      // log(decodeDataJson);
       List decodeMainJsonData = decodeDataJson['data']['MAIN'];
       log('4444444444444444444444444');
       print(decodeMainJsonData);
