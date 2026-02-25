@@ -26,19 +26,18 @@ class _MostPopularState extends State<MostPopular>
   Widget build(BuildContext context) {
     //TabController tabController = TabController(length: 5, vsync: this);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 14.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // const Text('Most Popular', style: ktextStyle18),
-          // const SizedBox(height: 12),
+          const SizedBox(height: 12),
           TabBarMostPopular(
             tabController: tabController,
             allPopularcubit: widget.allProducts,
           ),
           SizedBox(
-            height:
-                300, // حدد ارتفاعاً مناسباً أو استخدم Expanded إذا كنت داخل Column رئيسي
+            // height:
+            //     300, // حدد ارتفاعاً مناسباً أو استخدم Expanded إذا كنت داخل Column رئيسي
             child: Expanded(
               child: TabBarView(
                 controller: tabController,
@@ -114,18 +113,18 @@ class _MostPopularState extends State<MostPopular>
 // ويدجيت موحدة لبناء التبويب لمنع التكرار
 Widget buildTabItem(String label) {
   return Tab(
-    child: Container(
-      height: 28,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        border: Border.all(color: kprimaryColor),
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: 28,
 
-        borderRadius: BorderRadius.circular(18),
-      ),
-      child: Center(
-        child: Text(
-          label,
-          style: const TextStyle(color: Colors.black, fontSize: 12),
+        child: Center(
+          child: Text(
+            label,
+            softWrap: false,
+            overflow: TextOverflow.visible,
+            style: const TextStyle(color: Colors.black, fontSize: 16),
+          ),
         ),
       ),
     ),
@@ -150,13 +149,19 @@ class TabBarMostPopular extends StatelessWidget {
 
       isScrollable: true,
 
+      indicatorSize: TabBarIndicatorSize.tab,
+
       tabAlignment: TabAlignment.start,
-      labelPadding: const EdgeInsets.only(right: 14),
+      labelPadding: const EdgeInsets.symmetric(horizontal: 14),
       labelColor: kprimaryColor,
       unselectedLabelColor: Colors.white,
+      indicatorPadding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      dividerColor: Colors.white,
       indicator: BoxDecoration(
+        shape: BoxShape.rectangle,
+        border: Border.all(color: kprimaryColor, width: 1),
         borderRadius: BorderRadius.circular(16),
-        color: Colors.yellow, // اللون الأصفر عند الضغط
+        color: Theme.of(context).primaryColor, // اللون الأصفر عند الضغط
       ),
       tabs: [
         buildTabItem('All'),
