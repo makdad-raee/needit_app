@@ -132,25 +132,4 @@ class CustomSliverGridGoods extends StatelessWidget {
       ),
     );
   }
-
-  // List getCateList({required int imortantindex}) {
-  //   if (imortantindex == 1) {
-  //     return clothes;
-  //   } else if (imortantindex == 2) {
-  //     return electronic;
-  //   } else if (imortantindex == 3) {
-  //     return bags ?? [];
-  //   } else if (imortantindex == 4) {
-  //     return toys;
-  //   } else if (imortantindex == 5) {
-  //     return jewelry;
-  //   } else if (imortantindex == 6) {
-  //     return kitchen;
-  //   } else if (imortantindex == 7) {
-  //     return watch;
-  //   } else if (imortantindex == 7) {
-  //     return shoes;
-  //   }
-  //   return clothes;
-  // }
 }

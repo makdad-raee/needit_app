@@ -39,9 +39,8 @@ class OffersAndGridViewCircleAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       clipBehavior: Clip.hardEdge,
-      //  fit: StackFit.loose,
+
       children: [
-        //  const PostiondCirclesFromlt(),
         Column(
           children: [
             GestureDetector(

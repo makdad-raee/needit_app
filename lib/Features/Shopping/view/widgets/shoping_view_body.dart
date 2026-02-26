@@ -44,98 +44,84 @@ class HomeViewBodyShop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: CustomScrollView(
-          slivers: [
+      child: NestedScrollView(
+        // الجزء العلوي الذي يختفي عند السكرول (Appbar, Search, Offers)
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
             SliverToBoxAdapter(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: const CustomAppBar(),
-                      ),
-                      const SizedBox(height: 40),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: const SearchPlace(),
-                      ),
-                      const SizedBox(height: 16),
-                      OffersAndGridViewCircleAvatar(
-                        oofersEn: offerS,
-                        mainEntity: mainS,
-                        bags: bags ?? [],
-                        clothes: clothes ?? [],
-                        electronic: electronic ?? [],
-                        jewelry: jewelry ?? [],
-                        kitchen: kitchen ?? [],
-                        shoes: shoes ?? [],
-                        toys: toys ?? [],
-                        watch: watch ?? [],
-                        popularS: popularS,
-                      ),
-                      const SizedBox(height: 24),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Most Popular',
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodyMedium!.copyWith(
-                                fontWeight: FontWeight.w700,
-                                fontFamily: kSwiss721Bold,
-                              ),
-                            ),
-                            const Spacer(),
-                            Text(
-                              'See all',
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodySmall!.copyWith(
-                                fontFamily: kRubikRubikRegular,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // const SizedBox(height: 18),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 20),
-                      //   child: ListOfContainers(popularEntity: popularS),
-                      // ),
-                      BlocConsumer<GetProductsBloc, GetProductsState>(
-                        listener: (context, state) {},
-                        builder: (context, state) {
-                          if (state is GetProductsLoading) {
-                            return const LoadingWidgets();
-                          }
-                          if (state is GetProductsSuccessState) {
-                            return MostPopular(allProducts: state.products);
-                          }
-                          if (state is GetProductsErrorState) {
-                            return const Center(
-                              child: Text('No data please try again later'),
-                            );
-                          }
-                          return const LoadingWidgets();
-                        },
-                      ),
-                      // const SizedBox(height: 20),
-                    ],
+                  const SizedBox(height: 20),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: CustomAppBar(),
                   ),
+                  const SizedBox(height: 40),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: SearchPlace(),
+                  ),
+                  const SizedBox(height: 16),
+                  OffersAndGridViewCircleAvatar(
+                    oofersEn: offerS,
+                    mainEntity: mainS,
+
+                    popularS: popularS,
+                    clothes: clothes,
+                    toys: toys,
+                    watch: watch,
+                    kitchen: kitchen,
+                    shoes: shoes,
+                    jewelry: jewelry,
+                    bags: bags,
+                    electronic: electronic,
+                  ),
+                  const SizedBox(height: 24),
+                  _buildMostPopularHeader(context),
                 ],
               ),
             ),
-          ],
+          ];
+        },
+        // الجزء السفلي الذي يحتوي على الـ TabBar والمنتجات
+        body: BlocBuilder<GetProductsBloc, GetProductsState>(
+          builder: (context, state) {
+            if (state is GetProductsLoading) return const LoadingWidgets();
+            if (state is GetProductsSuccessState) {
+              // الآن MostPopular ستكون هي الـ Body وتتحكم بالسكرول الخاص بها
+              return MostPopular(allProducts: state.products);
+            }
+            return const Center(child: Text('Error loading products'));
+          },
         ),
       ),
     );
   }
+}
+
+Widget _buildMostPopularHeader(BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    child: Row(
+      children: [
+        Text(
+          'Most Popular',
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontWeight: FontWeight.w700,
+            fontFamily: kSwiss721Bold,
+          ),
+        ),
+        const Spacer(),
+        Text(
+          'See all',
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            fontFamily: kRubikRubikRegular,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+          ),
+        ),
+      ],
+    ),
+  );
 }
