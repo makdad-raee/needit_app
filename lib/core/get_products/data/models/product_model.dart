@@ -2,6 +2,7 @@ import 'package:needit_app/core/get_products/Domain/entity/product_entity.dart';
 
 class ProductModel extends ProductEntity {
   ProductModel({
+    super.id,
     required super.categoryID,
     required super.name,
     required super.description,
@@ -14,9 +15,13 @@ class ProductModel extends ProductEntity {
     super.ratingCount,
     super.imageUrl,
     required super.reviews,
+    required super.price,
+    super.originalPrice,
+    required super.isOffer,
   });
   factory ProductModel.fromUserEntity(ProductEntity productInputEntity) {
     return ProductModel(
+      id: productInputEntity.id,
       categoryID: productInputEntity.categoryID,
       name: productInputEntity.name,
       code: productInputEntity.code,
@@ -29,10 +34,14 @@ class ProductModel extends ProductEntity {
       ratingCount: productInputEntity.ratingCount,
       imageUrl: productInputEntity.imageUrl,
       reviews: productInputEntity.reviews,
+      isOffer: productInputEntity.isOffer,
+      price: productInputEntity.price,
+      originalPrice: productInputEntity.originalPrice,
     );
   }
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
+      id: map['id'] ?? 'ID not provided',
       categoryID: map['categoryID'] ?? 'Category ID not provided',
       name: map['name'] ?? 'Name not provided',
       code: map['code'] ?? 'Code not provided',
@@ -49,11 +58,18 @@ class ProductModel extends ProductEntity {
             map['reviews']?.map((x) => ReviewModel.fromMap(map: x)),
           ) ??
           [],
+      price: (map['price'] ?? 0).toDouble(),
+      originalPrice:
+          map['originalPrice'] != null
+              ? (map['originalPrice'] as num).toDouble()
+              : null,
+      isOffer: map['isOffer'] ?? false,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'categoryID': categoryID,
       'name': name,
       'description': description,
@@ -65,6 +81,9 @@ class ProductModel extends ProductEntity {
       'avRating': avRating,
       'ratingCount': ratingCount,
       'imageUrl': imageUrl,
+      'originalPrice': originalPrice,
+      'price': price,
+      'isOffer': isOffer,
       'reviews':
           reviews
               .map((e) => ReviewModel.fromReviewEntity(reviewEntity: e).toMap())

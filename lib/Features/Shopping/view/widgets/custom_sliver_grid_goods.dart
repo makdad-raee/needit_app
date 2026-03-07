@@ -1,5 +1,10 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_bloc.dart';
+import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_event.dart';
 
 import 'package:needit_app/constant.dart';
 import 'package:needit_app/core/get_products/Domain/entity/product_entity.dart';
@@ -72,7 +77,7 @@ class CustomSliverGridGoods extends StatelessWidget {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Text(
-                      products[index].name ?? 'hoooo',
+                      products[index].name,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontSize: 16,
                         fontFamily: kRubikRubikMedium,
@@ -109,20 +114,38 @@ class CustomSliverGridGoods extends StatelessWidget {
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
-                          products[index].avRating.toString() ?? '8.795 sold',
+                          products[index].avRating.toString(),
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ),
                     ],
                   ),
-                  Text(
-                    '33\$',
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontSize: 16,
-                      fontFamily: kSwiss721Bold,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        "${products[index].price.toString()} \$",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 16,
+                          fontFamily: kSwiss721Bold,
+                        ),
+                      ),
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          log("Adding product to cart: ${products[index].id}");
+                          BlocProvider.of<CartBloc>(
+                            context,
+                          ).add(AddToCartEvent(products[index]));
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          child: Icon(Icons.add),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                    ],
                   ),
                 ],
               ),

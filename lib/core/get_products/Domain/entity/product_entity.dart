@@ -1,6 +1,9 @@
 import 'dart:io';
 
-class ProductEntity {
+import 'package:equatable/equatable.dart';
+
+class ProductEntity extends Equatable {
+  final String? id;
   final String categoryID;
   final String name;
   final String description;
@@ -13,6 +16,9 @@ class ProductEntity {
   final num ratingCount;
   final List<String> sizes;
   final List<ReviewEntity> reviews;
+  final num price; // السعر الفعلي اللي هيدفعه الزبون حالياً
+  final num? originalPrice; // السعر الأصلي (قبل الخصم) - لو null يعني مافي خصم
+  final bool isOffer;
 
   ProductEntity({
     required this.categoryID,
@@ -27,10 +33,17 @@ class ProductEntity {
     this.avRating = 0,
     this.ratingCount = 0,
     required this.reviews,
+    this.id,
+    required this.price,
+    this.originalPrice,
+    required this.isOffer,
   });
+
+  @override
+  List<Object?> get props => [id];
 }
 
-class ReviewEntity {
+class ReviewEntity extends Equatable {
   final String name;
   final String image;
   final num rating;
@@ -44,10 +57,13 @@ class ReviewEntity {
     required this.date,
     required this.reviewDescription,
   });
+
+  @override
+  List<Object?> get props => [name, rating, reviewDescription];
 }
 
 class ReviewModel extends ReviewEntity {
-  ReviewModel({
+  const ReviewModel({
     required super.name,
     required super.image,
     required super.rating,

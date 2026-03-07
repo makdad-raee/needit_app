@@ -2,25 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_entity.dart';
 import 'package:needit_app/Features/Shopping/domain/Entities/product_entity_category.dart';
-import 'package:needit_app/Features/checkout/Domain/entities/location_entity.dart';
-import 'package:needit_app/Features/checkout/Domain/entities/promo_entity.dart';
-import 'package:needit_app/Features/checkout/Domain/entities/shipping_type_entity.dart';
 
 const limit = 10;
-ValueNotifier<ShippingTypeEntity?> shippingTypeEntityNotifier =
-    ValueNotifier<ShippingTypeEntity?>(null);
-ValueNotifier<LocationEntity?> locationNotifier =
-    ValueNotifier<LocationEntity?>(null);
-ValueNotifier<PromoEntity?> promoEntityNotifier = ValueNotifier<PromoEntity?>(
-  null,
-);
+
 ValueNotifier<int> imortantindex = ValueNotifier<int>(0);
 //ValueNotifier<double> totalPRice = ValueNotifier<double>(0);
 double kTotalPrice = 0.0;
-ValueNotifier<List<CartEntity>> cartentityNotifer =
-    ValueNotifier<List<CartEntity>>([]);
+
 ValueNotifier<List<ProductEntityCategory>> bagsEntityNotifer =
     ValueNotifier<List<ProductEntityCategory>>([]);
 ValueNotifier<List<ProductEntityCategory>> productsEntityNotifer =

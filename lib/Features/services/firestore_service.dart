@@ -28,7 +28,13 @@ class FirestorService implements DataBaseService {
       }
     } else {
       final querySnapshot = await firestore.collection(path).get();
-      final dataList = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+      final dataList =
+          querySnapshot.docs.map((doc) {
+            final data = doc.data();
+            data['id'] = doc.id;
+            return data;
+          }).toList();
       return dataList;
     }
   }

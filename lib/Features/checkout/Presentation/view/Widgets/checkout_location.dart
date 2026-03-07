@@ -47,20 +47,15 @@ class CheckoutLocation extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ValueListenableBuilder(
-                    valueListenable: locationNotifier,
-                    builder:
-                        (context, value, child) => Text(
-                          value == null ? 'Home' : value.name,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodySmall!.copyWith(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: kRubikRubikMedium,
-                          ),
-                        ),
+                  Text(
+                    'Home',
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: kRubikRubikMedium,
+                    ),
                   ),
+
                   Text(
                     '61480 Sunbrook Park , PC 5679',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(

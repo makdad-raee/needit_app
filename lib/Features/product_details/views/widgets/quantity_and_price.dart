@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_entity.dart';
-import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/my_cart_bloc.dart';
 import 'package:needit_app/Features/product_details/Domain/Entities/details_entity.dart';
 import 'package:needit_app/constant.dart';
 
@@ -117,87 +114,77 @@ class _QuantityAndPriceState extends State<QuantityAndPrice> {
                   color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: ValueListenableBuilder(
-                  valueListenable: colorNotifier,
-                  builder:
-                      (context, value1, child) => ValueListenableBuilder(
-                        valueListenable: sizeNotifier,
-                        builder:
-                            (context, value, child) => GestureDetector(
-                              onTap: () {
-                                print('add to cart button');
-                                BlocProvider.of<MyCartBloc>(context).add(
-                                  AddToCartEvent(
-                                    id: widget.detailsModel.id,
-                                    cartEntity: CartEntity(
-                                      priceOnePiesce: widget.detailsModel.price,
-                                      name: widget.detailsModel.name,
-                                      totalPRice:
-                                          widget.detailsModel.price *
-                                          _counter.toDouble(),
-                                      quantity: _counter,
-                                      color:
-                                          value1 == '' ? null : value1, //null,
-                                      size: value == '' ? null : value,
-                                      imageUrl:
-                                          widget.detailsModel.imageUrl ?? '',
-                                      id: widget.detailsModel.id,
-                                    ),
-                                  ),
-                                );
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Row(
-                                      children: [
-                                        Text(
-                                          'Added to cart',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        SizedBox(width: 10),
-                                        Icon(
-                                          Icons.check_circle_outline_outlined,
-                                          color: Colors.green,
-                                        ),
-                                      ],
-                                    ),
-                                    backgroundColor: Colors.white,
-                                    duration: Duration(seconds: 2),
-                                  ),
-                                );
-                                setState(() {
-                                  sizeNotifier.value = '';
-                                  colorNotifier.value = '';
-                                });
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/images/lock.svg',
-                                    colorFilter: const ColorFilter.mode(
-                                      kprimaryColor,
-                                      BlendMode.srcIn,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    'Add to Cart',
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.bodyMedium!.copyWith(
-                                      fontSize: 16,
-                                      fontFamily: kSwiss721Bold,
-                                      //color: Colors.black38,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                child: GestureDetector(
+                  onTap: () {
+                    // print('add to cart button');
+                    // BlocProvider.of<MyCartBloc>(context).add(
+                    //   AddToCartEvent(
+                    //     id: widget.detailsModel.id,
+                    //     cartEntity: CartEntity(
+                    //       priceOnePiesce: widget.detailsModel.price,
+                    //       name: widget.detailsModel.name,
+                    //       totalPRice:
+                    //           widget.detailsModel.price *
+                    //           _counter.toDouble(),
+                    //       quantity: _counter,
+                    //       color:
+                    //           value1 == '' ? null : value1, //null,
+                    //       size: value == '' ? null : value,
+                    //       imageUrl:
+                    //           widget.detailsModel.imageUrl ?? '',
+                    //       id: widget.detailsModel.id,
+                    //     ),
+                    //   ),
+                    // );
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   const SnackBar(
+                    //     content: Row(
+                    //       children: [
+                    //         Text(
+                    //           'Added to cart',
+                    //           style: TextStyle(
+                    //             color: Colors.black,
+                    //             fontWeight: FontWeight.bold,
+                    //           ),
+                    //         ),
+                    //         SizedBox(width: 10),
+                    //         Icon(
+                    //           Icons.check_circle_outline_outlined,
+                    //           color: Colors.green,
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     backgroundColor: Colors.white,
+                    //     duration: Duration(seconds: 2),
+                    //   ),
+                    // );
+                    // setState(() {
+                    //   sizeNotifier.value = '';
+                    //   colorNotifier.value = '';
+                    // });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/lock.svg',
+                        colorFilter: const ColorFilter.mode(
+                          kprimaryColor,
+                          BlendMode.srcIn,
+                        ),
                       ),
+                      const SizedBox(width: 4),
+                      Text(
+                        'Add to Cart',
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 16,
+                          fontFamily: kSwiss721Bold,
+                          //color: Colors.black38,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

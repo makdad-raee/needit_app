@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needit_app/Features/Account/Presentation/View/acoount_view.dart';
-import 'package:needit_app/Features/Add%20to%20cart/presentation/views/my_cart.dart';
+import 'package:needit_app/Features/Add%20to%20cart/presentation/views/my_cart_view.dart';
 import 'package:needit_app/Features/Auth/Domain/entites/user_untity.dart';
 import 'package:needit_app/Features/Login/Presentation/view/login_view.dart';
 import 'package:needit_app/Features/Orders/Presentation/View/order_view.dart';

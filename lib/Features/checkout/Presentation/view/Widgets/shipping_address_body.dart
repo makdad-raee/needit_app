@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_svg/svg.dart';
-import 'package:needit_app/Features/checkout/Domain/entities/location_entity.dart';
-import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_bloc.dart';
+
 import 'package:needit_app/constant.dart';
 import 'package:needit_app/core/widgets/comtinue_buttom.dart';
 
@@ -72,15 +71,15 @@ class ShippingBodySection2 extends StatelessWidget {
         ContinueBottom(
           text: 'Apply',
           onTap: () {
-            BlocProvider.of<CheckoutBloc>(context).add(
-              AddlocationEvent(
-                locationEntity: LocationEntity(
-                  logo: 'loge',
-                  name: "Latakia",
-                  details: "Lattakia -al zerraaa",
-                ),
-              ),
-            );
+            // BlocProvider.of<CheckoutBloc>(context).add(
+            //   AddlocationEvent(
+            //     locationEntity: LocationEntity(
+            //       logo: 'loge',
+            //       name: "Latakia",
+            //       details: "Lattakia -al zerraaa",
+            //     ),
+            //   ),
+            // );
             Navigator.of(context).pop();
           },
         ),

@@ -1,33 +1,14 @@
 import 'package:equatable/equatable.dart';
+import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_item_entity.dart';
 
 class CartEntity extends Equatable {
-  final int id;
-  final String name;
-  late double totalPRice;
-  late int quantity;
-  final String? color;
-  final String? size;
-  final String? imageUrl;
-  final dynamic priceOnePiesce;
+  final List<CartItemEntity> items;
 
-  CartEntity({
-    required this.name,
-    required this.totalPRice,
-    required this.quantity,
-    required this.color,
-    required this.size,
-    required this.imageUrl,
-    required this.id,
-    required this.priceOnePiesce,
-  });
+  const CartEntity({this.items = const []});
+
+  double get totalPrice =>
+      items.fold(0, (total, item) => total + item.totalItemPrice);
 
   @override
-  List<Object?> get props => [
-        totalPRice,
-        quantity,
-        color,
-        size,
-        imageUrl,
-        priceOnePiesce,
-      ];
+  List<Object?> get props => [items];
 }

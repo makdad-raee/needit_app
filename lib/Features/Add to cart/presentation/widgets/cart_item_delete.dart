@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_entity.dart';
+import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_item_entity.dart';
 
 class CardItemDelete extends StatelessWidget {
-  const CardItemDelete({super.key, required this.cartList});
-  final CartEntity cartList;
+  const CardItemDelete({super.key, required this.cartItem});
+  final CartItemEntity cartItem;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +37,8 @@ class CardItemDelete extends StatelessWidget {
               ),
               child: Image.network(
                 fit: BoxFit.contain,
-                cartList.imageUrl ??
-                    'https://img.freepik.com/free-photo/forklift-boxes-arrangement_23-2149853118.jpg?t=st=1723569462~exp=1723573062~hmac=db877b441335a64500852f42152f9220ad73c496720648342b8bb2130bccbafa&w=740',
+                // cartList.imageUrl ??
+                'https://img.freepik.com/free-photo/forklift-boxes-arrangement_23-2149853118.jpg?t=st=1723569462~exp=1723573062~hmac=db877b441335a64500852f42152f9220ad73c496720648342b8bb2130bccbafa&w=740',
               ),
             ),
           ),
@@ -56,7 +56,7 @@ class CardItemDelete extends StatelessWidget {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Text(
-                            cartList.name,
+                            " cartList.name,",
                             //   overflow: TextOverflow.ellipsis,
                             //  maxLines: 1,
                             style: const TextStyle(

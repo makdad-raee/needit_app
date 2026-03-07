@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/my_cart_bloc.dart';
+import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_bloc.dart';
 import 'package:needit_app/Features/Home/views/home_view.dart';
 import 'package:needit_app/Features/Shopping/presentaion/bloc/Shop%20bloc/shop_bloc.dart';
 import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_bloc.dart';
@@ -30,9 +30,7 @@ class RootApp extends StatelessWidget {
           create: (context) => di.sl<ShopBloc>()..add(GetAllMainEvent()),
         ),
         BlocProvider(create: (context) => di.sl<DetailsBlocBloc>()),
-        BlocProvider(
-          create: (context) => di.sl<MyCartBloc>()..add(GetAllCartEvent()),
-        ),
+        BlocProvider(create: (context) => di.sl<CartBloc>()),
         BlocProvider(
           create:
               (context) =>

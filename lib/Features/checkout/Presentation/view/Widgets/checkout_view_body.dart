@@ -16,7 +16,8 @@ class CheckoutViewBody extends StatelessWidget {
         SliverList.builder(
           itemCount: cartList.length,
           itemBuilder:
-              (context, index) => ProductItemForCart(cartList: cartList[index]),
+              (context, index) =>
+                  ProductItemForCart(cartItem: cartList[index].items[index]),
         ),
         SliverToBoxAdapter(
           child: Padding(

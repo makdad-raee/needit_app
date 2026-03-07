@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_entity.dart';
 import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_bloc.dart';
+import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_state.dart';
 import 'package:needit_app/Features/checkout/Presentation/view/Widgets/checkout_view_body.dart';
 import 'package:needit_app/constant.dart';
 
