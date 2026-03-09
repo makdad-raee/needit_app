@@ -6,10 +6,12 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:needit_app/Features/Account/Data/repo/create_user_from_firebase_repo_impl.dart';
 import 'package:needit_app/Features/Account/Domain/repos/create_user_from_firebase_repo.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Data/Local/cart_local_data_source.dart';
+import 'package:needit_app/Features/Add%20to%20cart/Data/Remote/cart_remote_source.dart';
 
 import 'package:needit_app/Features/Add%20to%20cart/Data/repositories/cart_repo_impl.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/Repositories/cart_reposotries.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/cache_cart_use_case.dart';
+import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/check_out_use_case.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/get_cashed_cart_use_case.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_bloc.dart';
 import 'package:needit_app/Features/Auth/Data/repos/auth_repo_impl.dart';
@@ -29,8 +31,8 @@ import 'package:needit_app/Features/Shopping/domain/Use%20cases/get_all_offers.d
 import 'package:needit_app/Features/Shopping/domain/Use%20cases/get_all_popular.dart';
 import 'package:needit_app/Features/Shopping/domain/Use%20cases/get_products_of_category.dart';
 import 'package:needit_app/Features/Shopping/presentaion/bloc/Shop%20bloc/shop_bloc.dart';
-
 import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_bloc.dart';
+
 import 'package:needit_app/Features/clothes_bags_etc/presentation/bloc/bloc/products_of_category_bloc.dart';
 import 'package:needit_app/Features/product_details/Domain/Repositories/details_repo.dart';
 import 'package:needit_app/Features/product_details/Domain/Use%20case/get_details_use_case.dart';
@@ -89,7 +91,7 @@ Future<void> init() async {
   sl.registerFactory(
     () => ProductsOfCategoryBloc(getProductsOfCategoryUseCase: sl.call()),
   );
-  // sl.registerFactory(() => CheckoutBloc(sl.call(), sl.call(), sl.call()));
+  sl.registerFactory(() => CheckoutBloc(checkoutUseCase: sl.call()));
   //! usecases
   sl.registerLazySingleton(() => GetAllMainUseCase(repository: sl.call()));
   sl.registerLazySingleton(() => GetAllOffersUseCase(repository: sl.call()));
@@ -113,6 +115,7 @@ Future<void> init() async {
   );
   sl.registerLazySingleton(() => GetProductsUseCase(productRepo: sl.call()));
 
+  sl.registerLazySingleton(() => CheckoutUseCase(cartRepositories: sl.call()));
   //! repository
   sl.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
@@ -148,7 +151,14 @@ Future<void> init() async {
   sl.registerLazySingleton<ProductRepo>(
     () => ProductsRepoImpl(dataBaseService: sl.call()),
   );
+
   //! data source
+  sl.registerLazySingleton<CartLocalDataSource>(
+    () => CartLocalDataSourceImpl(sharedPreferences: sl.call()),
+  );
+  sl.registerLazySingleton<CartRemoteDataSource>(
+    () => CartRemoteDataSourceImpl(firestore: sl.call(), auth: sl.call()),
+  );
   sl.registerLazySingleton<ShopLocalDataSource>(
     () => ShopLocalDataSourceImpl(sharedPreferences: sl.call()),
   );
@@ -162,9 +172,6 @@ Future<void> init() async {
 
   sl.registerLazySingleton<DetailsLocalDataSource>(
     () => DetailsLocalDataSourceImpl(sharedPreferences: sl.call()),
-  );
-  sl.registerLazySingleton<CartLocalDataSource>(
-    () => CartLocalDataSourceImpl(sharedPreferences: sl.call()),
   );
 
   sl.registerLazySingleton(() => FirebaseAuth.instance);

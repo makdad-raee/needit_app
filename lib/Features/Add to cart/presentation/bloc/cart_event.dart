@@ -21,3 +21,5 @@ class UpdateQuantityEvent extends CartEvent {
   final int quantity;
   const UpdateQuantityEvent(this.product, this.quantity);
 }
+
+class ClearCartEvent extends CartEvent {} // لمسح السلة بعد إتمام الطلب

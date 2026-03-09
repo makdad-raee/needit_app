@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Data/Local/cart_local_data_source.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Data/Remote/cart_remote_source.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Data/models/cart_item_model.dart';
-import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_entity.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_item_entity.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/Repositories/cart_reposotries.dart';
 import 'package:needit_app/Features/Orders/Data/models/order_model.dart';

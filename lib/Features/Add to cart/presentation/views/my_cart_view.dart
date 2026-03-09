@@ -5,6 +5,7 @@ import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_event
 import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_state.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/widgets/empty_cart.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/widgets/my_cart_view_body.dart';
+import 'package:needit_app/Features/checkout/Presentation/view/checkout_view.dart';
 import 'package:needit_app/constant.dart';
 import 'package:needit_app/core/widgets/loading_widgets.dart';
 
@@ -101,6 +102,15 @@ class _MyCartViewState extends State<MyCartView> {
           const SizedBox(height: 15),
           ElevatedButton(
             onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder:
+                      (context) => CheckoutView(
+                        cartList: state.cart.items,
+                        subTotal: state.cart.totalPrice,
+                      ),
+                ),
+              );
               // هنا تنادي حدث الـ Checkout الذي تكلمنا عنه
               // context.read<CartBloc>().add(CheckoutEvent());
             },

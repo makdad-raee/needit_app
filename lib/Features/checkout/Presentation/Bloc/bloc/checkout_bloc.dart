@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:needit_app/Features/Add%20to%20cart/Data/models/cart_item_model.dart';
+import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/check_out_use_case.dart';
 import 'package:needit_app/Features/Orders/Data/models/order_model.dart';
-import 'package:needit_app/Features/Orders/Domain/use%20case/place_order_use_case.dart';
 import 'package:needit_app/Features/checkout/Data/models/addres_model.dart';
 import 'package:needit_app/Features/checkout/Data/models/shipping_methode_model.dart';
 import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_event.dart';
@@ -8,9 +9,8 @@ import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_sta
 import 'package:needit_app/dummy_data.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
-  final PlaceOrderUseCase placeOrderUseCase;
-  CheckoutBloc({required this.placeOrderUseCase})
-    : super(const CheckoutState()) {
+  final CheckoutUseCase checkoutUseCase;
+  CheckoutBloc({required this.checkoutUseCase}) : super(const CheckoutState()) {
     // 1. تحميل البيانات الأولية
     on<LoadCheckoutInitialData>((event, emit) {
       emit(state.copyWith(isLoading: true));
@@ -40,8 +40,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     // 2. تغيير العنوان المختار
     on<SelectShippingAddress>((event, emit) {
       final addressModel = AddressModel.fromEntity(event.address);
-
-      emit(state.copyWith(selectedAddress: addressModel));
+      emit(state.copyWith(selectedAddress: addressModel).calculateTotals());
     });
 
     // 3. اختيار وسيلة الشحن وحساب المجموع النهائي
@@ -58,11 +57,15 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       emit(state.copyWith(isLoading: true));
 
       try {
+        final List<CartItemModel> itemModels =
+            event.cartItems.map((entity) {
+              return CartItemModel.fromEntity(entity);
+            }).toList();
         // تجميع البيانات في OrderModel واحد
         final order = OrderModel(
           orderId: DateTime.now().millisecondsSinceEpoch.toString(), // ID مؤقت
           userId: event.userId,
-          items: event.cartItems, // نمررها من الـ Event
+          items: itemModels, // نمررها من الـ Event
           address: state.selectedAddress!,
           shippingMethod: state.selectedShippingMethod!,
           paymentMethod: state.selectedPaymentMethod?.name ?? "PayPal",
@@ -73,9 +76,14 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
           createdAt: DateTime.now(),
         );
 
-        await placeOrderUseCase.call(order);
-
-        emit(state.copyWith(isLoading: false, isOrderSuccess: true));
+        final result = await checkoutUseCase.call(order);
+        result.fold(
+          (failure) => emit(
+            state.copyWith(isLoading: false, errorMessage: failure.message),
+          ),
+          (success) =>
+              emit(state.copyWith(isLoading: false, isOrderSuccess: true)),
+        );
       } catch (e) {
         emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
       }

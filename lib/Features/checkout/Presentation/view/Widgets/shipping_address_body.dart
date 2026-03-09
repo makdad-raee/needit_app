@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_bloc.dart';
+import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_event.dart';
+import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_state.dart';
 
 import 'package:needit_app/constant.dart';
 import 'package:needit_app/core/widgets/comtinue_buttom.dart';
@@ -24,33 +28,48 @@ class _ShippingAddressBodyState extends State<ShippingAddressBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: CustomScrollView(
-            slivers: [
-              SliverList.separated(
-                separatorBuilder: (context, index) => SizedBox(height: 22),
-                itemCount: 5,
-                itemBuilder:
-                    (context, index) => GestureDetector(
-                      onTap: () {
-                        changeColor(index);
-                        setState(() {});
-                      },
-                      child: AddressItem(isSelected: isSelected[index]),
-                    ),
-              ),
-              // SliverFillRemaining(
-              //   hasScrollBody: false,
+    return BlocBuilder<CheckoutBloc, CheckoutState>(
+      builder:
+          (context, state) => Column(
+            children: [
+              Expanded(
+                child: CustomScrollView(
+                  slivers: [
+                    SliverList.separated(
+                      separatorBuilder:
+                          (context, index) => SizedBox(height: 22),
+                      itemCount: state.addresses.length,
+                      itemBuilder: (context, index) {
+                        final address = state.addresses[index];
+                        // نتحقق إذا كان هذا العنوان هو المختار حالياً في الـ State
+                        bool isSelected = state.selectedAddress == address;
 
-              //   child: ShippingBodySection2(),
-              // )
+                        return GestureDetector(
+                          onTap: () {
+                            // إرسال حدث الاختيار للـ Bloc
+                            context.read<CheckoutBloc>().add(
+                              SelectShippingAddress(address),
+                            );
+                          },
+                          child: AddressItem(
+                            isSelected: isSelected,
+                            addressName: address.title,
+                            addressDetails: address.addressLine,
+                          ),
+                        );
+                      },
+                    ),
+                    // SliverFillRemaining(
+                    //   hasScrollBody: false,
+
+                    //   child: ShippingBodySection2(),
+                    // )
+                  ],
+                ),
+              ),
+              ShippingBodySection2(),
             ],
           ),
-        ),
-        ShippingBodySection2(),
-      ],
     );
   }
 }
@@ -71,15 +90,6 @@ class ShippingBodySection2 extends StatelessWidget {
         ContinueBottom(
           text: 'Apply',
           onTap: () {
-            // BlocProvider.of<CheckoutBloc>(context).add(
-            //   AddlocationEvent(
-            //     locationEntity: LocationEntity(
-            //       logo: 'loge',
-            //       name: "Latakia",
-            //       details: "Lattakia -al zerraaa",
-            //     ),
-            //   ),
-            // );
             Navigator.of(context).pop();
           },
         ),
@@ -90,8 +100,16 @@ class ShippingBodySection2 extends StatelessWidget {
 }
 
 class AddressItem extends StatelessWidget {
-  const AddressItem({super.key, this.isSelected = false});
+  const AddressItem({
+    super.key,
+    this.isSelected = false,
+    required this.addressName,
+    required this.addressDetails,
+  });
   final bool isSelected;
+  final String addressName;
+  final String addressDetails;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -100,6 +118,13 @@ class AddressItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
+        border:
+            isSelected
+                ? Border.all(
+                  color: Theme.of(context).primaryColor,
+                  width: 2,
+                ) // تمييز الحواف عند الاختيار
+                : null,
         boxShadow: [
           BoxShadow(
             color: Color(0xff00000017),
@@ -130,7 +155,7 @@ class AddressItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    'Home',
+                    addressName,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -138,7 +163,8 @@ class AddressItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '61480 Sunbrook Park , PC 5679',
+                    addressDetails,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       fontSize: 12,
                       color: const Color(0xff9F9F9F),

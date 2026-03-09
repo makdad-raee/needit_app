@@ -1,12 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Data/models/cart_item_model.dart';
+import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_item_entity.dart';
 import 'package:needit_app/Features/checkout/Data/models/payment_methode_model.dart';
 import 'package:needit_app/Features/checkout/Domain/entities/address_entity.dart';
 import 'package:needit_app/Features/checkout/Domain/entities/shipping_methode_entity.dart';
 
-import 'package:equatable/equatable.dart';
-import 'package:needit_app/Features/checkout/Domain/entities/address_entity.dart';
-import 'package:needit_app/Features/checkout/Domain/entities/shipping_methode_entity.dart';
 import 'package:needit_app/Features/checkout/data/models/promo_code_model.dart';
 
 abstract class CheckoutEvent extends Equatable {
@@ -63,7 +61,7 @@ class ApplyPromoCodeEvent extends CheckoutEvent {
 // 6. الحدث النهائي: تأكيد الطلب وإرساله لـ Firebase
 class ConfirmOrderEvent extends CheckoutEvent {
   final String userId;
-  final List<CartItemModel> cartItems;
+  final List<CartItemEntity> cartItems;
 
   const ConfirmOrderEvent({required this.userId, required this.cartItems});
 
