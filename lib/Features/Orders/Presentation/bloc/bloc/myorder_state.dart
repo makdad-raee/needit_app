@@ -1,32 +1,32 @@
-part of 'myorder_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:needit_app/Features/Orders/Data/models/order_model.dart';
+import 'package:needit_app/Features/Orders/Domain/entity/order_entity.dart';
 
-@immutable
-sealed class MyorderState {}
+abstract class OrdersState extends Equatable {
+  const OrdersState();
 
-class MyorderInitial extends MyorderState {}
+  @override
+  List<Object?> get props => [];
+}
 
-final class AllorderLoaded extends MyorderState {}
+class OrdersInitial extends OrdersState {}
 
-final class AllorderError extends MyorderState {}
+class OrdersLoading extends OrdersState {}
 
-final class AllorderSussess extends MyorderState {}
+class OrdersLoaded extends OrdersState {
+  final List<OrderEntity> orders;
+  const OrdersLoaded({required this.orders});
 
-final class PaidOrderLoaded extends MyorderState {}
+  @override
+  List<Object?> get props => [orders];
+}
 
-final class PaidOrderError extends MyorderState {}
+class OrdersEmpty extends OrdersState {} // هذه للحالة الأولى في الصورة
 
-final class PaidOrderSussess extends MyorderState {}
+class OrdersError extends OrdersState {
+  final String message;
+  const OrdersError({required this.message});
 
-final class CancelledLoaded extends MyorderState {}
-
-final class CancelledError extends MyorderState {}
-
-final class CancelledSussess extends MyorderState {}
-
-final class DeliveredInitial extends MyorderState {}
-
-final class DeliveredLoaded extends MyorderState {}
-
-final class DeliveredError extends MyorderState {}
-
-final class DeliveredSussess extends MyorderState {}
+  @override
+  List<Object?> get props => [message];
+}

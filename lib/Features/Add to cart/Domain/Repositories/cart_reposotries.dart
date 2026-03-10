@@ -12,4 +12,6 @@ abstract class CartRepositories {
 
   // إرسال الطلب النهائي للسيرفر
   Future<Either<Failure, Unit>> checkout(OrderModel order);
+  // حذف كل العناصر من السلة (مثلاً بعد إتمام الطلب أو عند اختيار "مسح السلة")
+  Future<Either<Failure, Unit>> clearCart();
 }

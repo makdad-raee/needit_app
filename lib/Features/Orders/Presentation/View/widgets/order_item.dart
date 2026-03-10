@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:needit_app/Features/Orders/Domain/entity/order_entity.dart';
 import 'package:needit_app/Features/Orders/Presentation/View/widgets/product%20_order_item.dart';
 import 'package:needit_app/Features/order%20details/Presentation/view/order_details_view.dart';
 import 'package:needit_app/constant.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key});
-
+  const OrderItem({super.key, required this.order});
+  final OrderEntity order;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,7 +17,7 @@ class OrderItem extends StatelessWidget {
             Align(
               alignment: Alignment.bottomLeft,
               child: Text(
-                'Order #860123',
+                order.orderId,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   fontSize: 20,
                   fontFamily: kSwiss721Bold,
@@ -33,7 +34,7 @@ class OrderItem extends StatelessWidget {
                 OrderButtom(text: 'Refund', color: Color(0xffEDEDED)),
                 Spacer(),
                 OrderButtom(
-                  text: 'Details',
+                  text: order.status,
                   color: Theme.of(context).primaryColor,
                   onTap: () {
                     Navigator.of(context).push(

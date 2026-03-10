@@ -12,6 +12,7 @@ import 'package:needit_app/Features/Add%20to%20cart/Data/repositories/cart_repo_
 import 'package:needit_app/Features/Add%20to%20cart/Domain/Repositories/cart_reposotries.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/cache_cart_use_case.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/check_out_use_case.dart';
+import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/clear_cart_use_case.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/usecase/get_cashed_cart_use_case.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_bloc.dart';
 import 'package:needit_app/Features/Auth/Data/repos/auth_repo_impl.dart';
@@ -22,6 +23,10 @@ import 'package:needit_app/Features/Login/Data/repo/login_repo_impl.dart';
 import 'package:needit_app/Features/Login/Domain/Repos/login_repo.dart';
 import 'package:needit_app/Features/Login/Domain/usecase/login_use_case.dart';
 import 'package:needit_app/Features/Login/Presentation/Bloc/login_bloc.dart';
+import 'package:needit_app/Features/Orders/Data/repositories/order_repositories_impl.dart';
+import 'package:needit_app/Features/Orders/Domain/repositories/order_repositories.dart';
+import 'package:needit_app/Features/Orders/Domain/use%20case/get_orders_use_case.dart';
+import 'package:needit_app/Features/Orders/Presentation/bloc/bloc/myorder_bloc.dart';
 import 'package:needit_app/Features/Shopping/data/data%20source/shop_local_data_source.dart';
 import 'package:needit_app/Features/Shopping/data/data%20source/shop_remote_data_source.dart';
 import 'package:needit_app/Features/Shopping/data/reposetries/shop_reposetories_impl.dart';
@@ -85,13 +90,17 @@ Future<void> init() async {
   );
   sl.registerFactory(() => DetailsBlocBloc(getDetailsUseCase: sl.call()));
   sl.registerFactory(
-    () =>
-        CartBloc(cacheCartUseCase: sl.call(), getCachedCartUseCase: sl.call()),
+    () => CartBloc(
+      cacheCartUseCase: sl.call(),
+      getCachedCartUseCase: sl.call(),
+      clearCartUseCase: sl.call(),
+    ),
   );
   sl.registerFactory(
     () => ProductsOfCategoryBloc(getProductsOfCategoryUseCase: sl.call()),
   );
   sl.registerFactory(() => CheckoutBloc(checkoutUseCase: sl.call()));
+  sl.registerFactory(() => OrdersBloc(getOrdersUseCase: sl.call()));
   //! usecases
   sl.registerLazySingleton(() => GetAllMainUseCase(repository: sl.call()));
   sl.registerLazySingleton(() => GetAllOffersUseCase(repository: sl.call()));
@@ -116,7 +125,11 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetProductsUseCase(productRepo: sl.call()));
 
   sl.registerLazySingleton(() => CheckoutUseCase(cartRepositories: sl.call()));
-  //! repository
+  sl.registerLazySingleton(() => ClearCartUseCase(repository: sl.call()));
+  sl.registerLazySingleton(
+    () => GetOrdersUseCase(orderRepositories: sl.call()),
+  );
+  //! repositorys
   sl.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
       firbaseAuthService: FirbaseAuthService(),
@@ -151,7 +164,9 @@ Future<void> init() async {
   sl.registerLazySingleton<ProductRepo>(
     () => ProductsRepoImpl(dataBaseService: sl.call()),
   );
-
+  sl.registerLazySingleton<OrderRepositories>(
+    () => OrderRepositoriesImpl(dataBaseService: sl.call()),
+  );
   //! data source
   sl.registerLazySingleton<CartLocalDataSource>(
     () => CartLocalDataSourceImpl(sharedPreferences: sl.call()),

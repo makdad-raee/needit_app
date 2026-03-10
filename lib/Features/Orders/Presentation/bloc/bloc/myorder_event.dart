@@ -1,12 +1,16 @@
-part of 'myorder_bloc.dart';
+import 'package:equatable/equatable.dart';
 
-@immutable
-sealed class MyorderEvent {}
+abstract class OrdersEvent extends Equatable {
+  const OrdersEvent();
 
-class AllOrderEvent extends MyorderEvent {}
+  @override
+  List<Object?> get props => [];
+}
 
-class PaidOrderEvent extends MyorderEvent {}
+class FetchMyOrdersEvent extends OrdersEvent {
+  final String userId;
+  const FetchMyOrdersEvent({required this.userId});
 
-class DeliverdOrderEvent extends MyorderEvent {}
-
-class CancelledOrderEvent extends MyorderEvent {}
+  @override
+  List<Object?> get props => [userId];
+}

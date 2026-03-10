@@ -53,4 +53,16 @@ class CartRepoImpl implements CartRepositories {
       return Left(ServerFailure(message: 'Checkout failed: ${e.toString()}'));
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> clearCart() async {
+    try {
+      await cartRemoteDataSource.clearCart();
+      return const Right(unit);
+    } catch (e) {
+      return Left(
+        ServerFailure(message: 'Failed to clear cart: ${e.toString()}'),
+      );
+    }
+  }
 }

@@ -36,7 +36,11 @@ class _CheckoutViewState extends State<CheckoutView> {
       listener: (context, state) {
         if (state.isOrderSuccess) {
           context.read<CartBloc>().add(ClearCartEvent());
-          Navigator.pushReplacementNamed(context, '/ordersSuccessView');
+          Navigator.pop(context); // العودة إلى الشاشة السابقة (أو الرئيسية)
+          //     Navigator.pushReplacement(
+          // context,
+          // MaterialPageRoute(builder: (context) => const SuccessOrderView()), // اسم الكلاس الفعلي عندك
+          // );
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Order Placed Successfully!")),
           );
