@@ -7,48 +7,83 @@ import 'package:needit_app/constant.dart';
 class OrderItem extends StatelessWidget {
   const OrderItem({super.key, required this.order});
   final OrderEntity order;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Column(
-          children: [
-            SizedBox(height: 30),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Text(
-                order.orderId,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 30),
+          // عرض رقم الطلب
+          Row(
+            children: [
+              Text(
+                "Order #${order.orderId.substring(0, 8)}", // اختصار الـ ID ليكون أجمل
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   fontSize: 20,
                   fontFamily: kSwiss721Bold,
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            ProductOfOrderItem(),
-            SizedBox(height: 21),
-            ProductOfOrderItem(),
-            SizedBox(height: 21),
-            Row(
-              children: [
-                OrderButtom(text: 'Refund', color: Color(0xffEDEDED)),
-                Spacer(),
-                OrderButtom(
-                  text: order.status,
-                  color: Theme.of(context).primaryColor,
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => OrderDetailsView(),
-                      ),
-                    );
-                  },
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
                 ),
-              ],
-            ),
-          ],
-        ),
-      ],
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  'Total   ${order.subTotal.toStringAsFixed(2)} \$',
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontSize: 16,
+                    fontFamily: kSwiss721Black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          // عرض المنتجات الموجودة داخل هذا الطلب فقط
+          Column(
+            children:
+                order.items.map((item) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 21),
+                    child: ProductOfOrderItem(
+                      item: item,
+                    ), // تمرير المنتج الحقيقي
+                  );
+                }).toList(),
+          ),
+
+          Row(
+            children: [
+              const OrderButtom(text: 'Refund', color: Color(0xffEDEDED)),
+              const Spacer(),
+              OrderButtom(
+                // عرض حالة الطلب الحقيقية (Paid, Delivered, الخ) على الزر
+                text: order.status.toUpperCase(),
+                color: Theme.of(context).primaryColor,
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder:
+                          (context) => OrderDetailsView(
+                            order: order,
+                          ), // تمرير الطلب للتفاصيل
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -80,7 +115,7 @@ class OrderButtom extends StatelessWidget {
             text,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               fontSize: 12,
-              fontFamily: kSwiss721Bold,
+              fontFamily: kSwiss721Black,
             ),
           ),
         ),

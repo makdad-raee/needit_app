@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:needit_app/Features/Add%20to%20cart/Data/models/cart_item_model.dart';
 import 'package:needit_app/constant.dart';
 
 class ProductOfOrderItem extends StatelessWidget {
-  const ProductOfOrderItem({super.key});
+  const ProductOfOrderItem({super.key, required this.item});
 
+  final CartItemModel item;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,8 +38,8 @@ class ProductOfOrderItem extends StatelessWidget {
               ),
               child: Image.network(
                 fit: BoxFit.contain,
-                // cartList.imageUrl ??
-                'https://img.freepik.com/free-photo/men-shoes_1203-8652.jpg?t=st=1734897670~exp=1734901270~hmac=76e523bf76970ba600c7e20ef12e1f00fc798f80cc28b4ba471ee8dd8e5e1bf8&w=740',
+                item.productEntity.imageUrl ??
+                    'https://img.freepik.com/free-photo/men-shoes_1203-8652.jpg?t=st=1734897670~exp=1734901270~hmac=76e523bf76970ba600c7e20ef12e1f00fc798f80cc28b4ba471ee8dd8e5e1bf8&w=740',
               ),
             ),
           ),
@@ -55,10 +57,10 @@ class ProductOfOrderItem extends StatelessWidget {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Text(
-                            'Werolla Cardigans',
-                            //  cartList.name,
-                            //   overflow: TextOverflow.ellipsis,
-                            //  maxLines: 1,
+                            item.productEntity.name ?? 'Unknown Product',
+
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                             style: Theme.of(
                               context,
                             ).textTheme.bodyLarge!.copyWith(
@@ -72,7 +74,7 @@ class ProductOfOrderItem extends StatelessWidget {
                   ),
 
                   Text(
-                    '385.00 \$',
+                    '${item.productEntity.price} \$',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                   ),
                   Row(

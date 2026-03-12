@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:needit_app/Features/Orders/Domain/entity/order_entity.dart';
 import 'package:needit_app/Features/order%20details/Presentation/view/widget/order_details_view_body.dart';
 import 'package:needit_app/constant.dart';
 
 class OrderDetailsView extends StatelessWidget {
-  const OrderDetailsView({super.key});
+  const OrderDetailsView({super.key, required this.order});
+  final OrderEntity order;
 
   @override
   Widget build(BuildContext context) {
