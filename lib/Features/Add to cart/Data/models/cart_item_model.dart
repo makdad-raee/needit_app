@@ -2,10 +2,20 @@ import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_item_en
 import 'package:needit_app/core/get_products/data/models/product_model.dart';
 
 class CartItemModel extends CartItemEntity {
-  const CartItemModel({required super.productEntity, super.quantity});
+  const CartItemModel({
+    required super.productEntity,
+    super.quantity,
+    super.selectedSize,
+    super.selectedColor,
+  });
 
   factory CartItemModel.fromEntity(CartItemEntity entity) {
-    return CartItemModel(productEntity: entity.productEntity);
+    return CartItemModel(
+      productEntity: entity.productEntity,
+      quantity: entity.quantity,
+      selectedSize: entity.selectedSize,
+      selectedColor: entity.selectedColor,
+    );
   }
   factory CartItemModel.fromMap(Map<String, dynamic> map) {
     return CartItemModel(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needit_app/Features/Shopping/domain/Entities/product_entity_category.dart';
 import 'package:needit_app/Features/clothes_bags_etc/presentation/bloc/bloc/products_of_category_bloc.dart';
-import 'package:needit_app/Features/product_details/views/produst_details.dart';
 import 'package:needit_app/constant.dart';
 import 'package:needit_app/core/widgets/loading_widgets.dart';
 import 'package:text_scroll/text_scroll.dart';
@@ -31,14 +30,14 @@ class CategoryViewOfmainBody extends StatelessWidget {
               itemBuilder:
                   (context, index) => GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder:
-                              (context) => ProductDetailsView(
-                                id: state.productsOfCategory[index].id,
-                              ),
-                        ),
-                      );
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder:
+                      //         (context) => ProductDetailsView(
+                      //           id: state.productsOfCategory[index].id,
+                      //         ),
+                      //   ),
+                      // );
                     },
                     child: Container(
                       decoration: BoxDecoration(

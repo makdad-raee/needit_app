@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:needit_app/Features/Shopping/domain/Entities/offer_entity.dart';
 import 'package:needit_app/Features/Shopping/view/widgets/offer_item.dart';
-import 'package:needit_app/Features/product_details/views/produst_details.dart';
+import 'package:needit_app/Features/product_details/views/product_details_view.dart';
 
 class ShowAllOfferBody extends StatelessWidget {
   const ShowAllOfferBody({super.key, required this.offers});
@@ -13,14 +13,14 @@ class ShowAllOfferBody extends StatelessWidget {
       itemBuilder:
           (context, index) => GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder:
-                      (context) => ProductDetailsView(
-                        id: offers[index].productEntity.id,
-                      ),
-                ),
-              );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder:
+              //         (context) => ProductDetailsView(
+              //           id: offers[index].productEntity.id,
+              //         ),
+              //   ),
+              // );
             },
             child: OffersItem(offer: offers[index]),
           ),

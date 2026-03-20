@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_bloc.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_event.dart';
-
+import 'package:needit_app/Features/product_details/views/product_details_view.dart';
 import 'package:needit_app/constant.dart';
 import 'package:needit_app/core/get_products/Domain/entity/product_entity.dart';
 
@@ -28,17 +28,12 @@ class CustomSliverGridGoods extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder:
-              //         (context) => ProductDetailsView(
-              //           id:
-              //               getCateList(
-              //                 imortantindex: value.toInt(),
-              //               )[index].id,
-              //         ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder:
+                      (context) => ProductDetailsView(product: products[index]),
+                ),
+              );
             },
             child: Container(
               decoration: BoxDecoration(

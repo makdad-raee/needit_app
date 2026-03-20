@@ -11,36 +11,38 @@ class ProductEntity extends Equatable {
   final File? image;
   final bool isFeatured;
   String? imageUrl;
-  final List<int>? colors;
+  final List<int> colors; // أزلت الـ ? وجعلتها قائمة فارغة كافتراضي
   final num avRating;
   final num ratingCount;
   final List<String> sizes;
   final List<ReviewEntity> reviews;
-  final num price; // السعر الفعلي اللي هيدفعه الزبون حالياً
-  final num? originalPrice; // السعر الأصلي (قبل الخصم) - لو null يعني مافي خصم
+  final num price;
+  final num? originalPrice;
   final bool isOffer;
+  final int? soldCount; // إضافة جديدة لتناسب تصميم Figma (8.795 sold)
 
   ProductEntity({
     required this.categoryID,
     required this.name,
     required this.description,
     required this.code,
-    required this.image,
+    this.image, // جعلته اختياري لأننا غالباً نستخدم imageUrl من السيرفر
     required this.isFeatured,
     this.imageUrl,
-    required this.sizes,
-    required this.colors,
+    this.sizes = const [], // قيمة افتراضية تمنع الـ Null Pointer
+    this.colors = const [], // قيمة افتراضية
     this.avRating = 0,
     this.ratingCount = 0,
-    required this.reviews,
+    this.reviews = const [], // قيمة افتراضية
     this.id,
     required this.price,
     this.originalPrice,
     required this.isOffer,
+    this.soldCount = 0,
   });
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, name, price]; // تحديث الـ props للمقارنة بدقة
 }
 
 class ReviewEntity extends Equatable {

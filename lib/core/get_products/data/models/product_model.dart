@@ -18,6 +18,7 @@ class ProductModel extends ProductEntity {
     required super.price,
     super.originalPrice,
     required super.isOffer,
+    super.soldCount,
   });
   factory ProductModel.fromUserEntity(ProductEntity productInputEntity) {
     return ProductModel(
@@ -37,6 +38,7 @@ class ProductModel extends ProductEntity {
       isOffer: productInputEntity.isOffer,
       price: productInputEntity.price,
       originalPrice: productInputEntity.originalPrice,
+      soldCount: productInputEntity.soldCount,
     );
   }
   factory ProductModel.fromMap(Map<String, dynamic> map) {
@@ -64,6 +66,7 @@ class ProductModel extends ProductEntity {
               ? (map['originalPrice'] as num).toDouble()
               : null,
       isOffer: map['isOffer'] ?? false,
+      soldCount: (map['soldCount'] ?? 0).toInt(),
     );
   }
 
@@ -84,6 +87,7 @@ class ProductModel extends ProductEntity {
       'originalPrice': originalPrice,
       'price': price,
       'isOffer': isOffer,
+      'soldCount': soldCount,
       'reviews':
           reviews
               .map((e) => ReviewModel.fromReviewEntity(reviewEntity: e).toMap())

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:needit_app/Features/Shopping/domain/Entities/offer_entity.dart';
 import 'package:needit_app/Features/Shopping/view/show_all_offers_view.dart';
 import 'package:needit_app/Features/Shopping/view/widgets/offer_item.dart';
-import 'package:needit_app/Features/product_details/views/produst_details.dart';
 import 'package:needit_app/constant.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -55,14 +54,14 @@ class SpecialOffers extends StatelessWidget {
                 itemBuilder:
                     (context, index) => GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder:
-                                (context) => ProductDetailsView(
-                                  id: offer[index].productEntity.id,
-                                ),
-                          ),
-                        );
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder:
+                        //         (context) => ProductDetailsView(
+                        //           id: offer[index].productEntity.id,
+                        //         ),
+                        //   ),
+                        // );
                       },
                       child: OffersItem(offer: offer[index]),
                     ),

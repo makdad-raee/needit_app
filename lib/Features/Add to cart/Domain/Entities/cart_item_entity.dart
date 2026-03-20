@@ -4,12 +4,21 @@ import 'package:needit_app/core/get_products/Domain/entity/product_entity.dart';
 class CartItemEntity extends Equatable {
   final ProductEntity productEntity;
   final int quantity;
+  final String? selectedSize; // القياس اللي اختاره الزبون
+  final int? selectedColor;
 
-  const CartItemEntity({required this.productEntity, this.quantity = 1});
+  const CartItemEntity({
+    required this.productEntity,
+    this.quantity = 1,
+    this.selectedSize,
+    this.selectedColor,
+  });
   CartItemEntity copyWith({ProductEntity? product, int? quantity}) {
     return CartItemEntity(
       productEntity: product ?? productEntity,
       quantity: quantity ?? this.quantity,
+      selectedSize: selectedSize,
+      selectedColor: selectedColor,
     );
   }
 
