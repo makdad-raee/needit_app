@@ -4,7 +4,6 @@ import 'package:needit_app/Features/product_details/views/widgets/product_title_
 import 'package:needit_app/Features/product_details/views/widgets/quantity_section.dart';
 import 'package:needit_app/Features/product_details/views/widgets/selected_color.dart';
 import 'package:needit_app/Features/product_details/views/widgets/selected_size.dart';
-import 'package:needit_app/constant.dart';
 import 'package:needit_app/core/get_products/Domain/entity/product_entity.dart';
 
 class ProductDetailsView extends StatefulWidget {

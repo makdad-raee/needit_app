@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:needit_app/Features/Shopping/domain/Entities/offer_entity.dart';
 import 'package:needit_app/Features/Shopping/view/widgets/offer_item.dart';
-import 'package:needit_app/Features/product_details/views/product_details_view.dart';
 
 class ShowAllOfferBody extends StatelessWidget {
   const ShowAllOfferBody({super.key, required this.offers});

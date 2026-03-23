@@ -5,8 +5,6 @@ import 'package:needit_app/Features/Orders/Data/models/order_model.dart';
 import 'package:needit_app/Features/Orders/Domain/entity/order_entity.dart';
 import 'package:needit_app/Features/Orders/Domain/repositories/order_repositories.dart';
 import 'package:needit_app/Features/services/database_service.dart';
-import 'package:needit_app/Features/services/firestore_service.dart';
-import 'package:needit_app/core/utlis/backend_endpoints.dart';
 
 class OrderRepositoriesImpl implements OrderRepositories {
   final DataBaseService dataBaseService;

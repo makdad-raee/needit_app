@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Data/models/cart_item_model.dart';
-import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_item_entity.dart';
 import 'package:needit_app/Features/checkout/Data/models/addres_model.dart';
 import 'package:needit_app/Features/checkout/Data/models/shipping_methode_model.dart';
 

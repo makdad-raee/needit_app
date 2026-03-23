@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:needit_app/Features/Orders/Data/models/order_model.dart';
 import 'package:needit_app/Features/Orders/Domain/entity/order_entity.dart';
 
 abstract class OrdersState extends Equatable {
