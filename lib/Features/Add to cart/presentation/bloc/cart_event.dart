@@ -13,7 +13,15 @@ class LoadCartEvent extends CartEvent {} // لجلب السلة عند فتح ا
 class AddToCartEvent extends CartEvent {
   // Debug print
   final ProductEntity product;
-  const AddToCartEvent(this.product);
+  final int quantity;
+  final String? selectedSize;
+  final int? selectedColor;
+  const AddToCartEvent({
+    required this.product,
+    this.quantity = 1,
+    this.selectedSize,
+    this.selectedColor,
+  });
 }
 
 class UpdateQuantityEvent extends CartEvent {

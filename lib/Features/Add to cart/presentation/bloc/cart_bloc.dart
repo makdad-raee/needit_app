@@ -37,17 +37,27 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<AddToCartEvent>((event, emit) async {
       final List<CartItemEntity> currentItems = List.from(state.cart.items);
       final index = currentItems.indexWhere(
-        (item) => item.productEntity.id == event.product.id,
+        (item) =>
+            item.productEntity.id == event.product.id &&
+            item.selectedSize == event.selectedSize &&
+            item.selectedColor == event.selectedColor,
       );
 
       if (index != -1) {
         // إذا المنتج موجود، زوّد الكمية باستخدام copyWith
         currentItems[index] = currentItems[index].copyWith(
-          quantity: currentItems[index].quantity + 1,
+          quantity: currentItems[index].quantity + event.quantity,
         );
       } else {
         // إذا جديد، أضفه للقائمة
-        currentItems.add(CartItemEntity(productEntity: event.product));
+        currentItems.add(
+          CartItemEntity(
+            productEntity: event.product,
+            quantity: event.quantity,
+            selectedColor: event.selectedColor,
+            selectedSize: event.selectedSize,
+          ),
+        );
       }
 
       // تحديث الحالة فوراً في الـ UI

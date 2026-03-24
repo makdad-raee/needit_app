@@ -132,7 +132,7 @@ class CustomSliverGridGoods extends StatelessWidget {
                           log("Adding product to cart: ${products[index].id}");
                           BlocProvider.of<CartBloc>(
                             context,
-                          ).add(AddToCartEvent(products[index]));
+                          ).add(AddToCartEvent(product: products[index]));
                         },
                         child: CircleAvatar(
                           backgroundColor: Theme.of(context).primaryColor,

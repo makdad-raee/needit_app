@@ -36,86 +36,50 @@ class _ShoppingViewState extends State<ShoppingView> {
           // AccountView(),
         ];
         return Scaffold(
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-            child: Container(
-              height: 60,
-              decoration: BoxDecoration(
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    spreadRadius: 1,
-                    blurRadius: 3,
-                  ),
-                ],
-                border: const Border(
-                  top: BorderSide(width: 0.5, color: Colors.white),
-                  right: BorderSide(width: 0.5, color: Colors.white),
-                  left: BorderSide(width: 0.5, color: Colors.white),
+          bottomNavigationBar: Container(
+            // height: 60,
+            decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  spreadRadius: 1,
+                  blurRadius: 3,
                 ),
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.white,
+              ],
+              border: const Border(
+                top: BorderSide(width: 0.5, color: Colors.white),
+                right: BorderSide(width: 0.5, color: Colors.white),
+                left: BorderSide(width: 0.5, color: Colors.white),
               ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
-                child: BottomNavigationBar(
-                  selectedLabelStyle: const TextStyle(fontSize: 12),
-                  type: BottomNavigationBarType.fixed,
-                  elevation: 0,
-                  unselectedItemColor: Colors.black38,
-                  selectedItemColor: Theme.of(context).primaryColor,
-                  currentIndex: currentIndex,
-                  onTap: (value) {
-                    currentIndex = value;
-                    setState(() {});
-                  },
-                  items: bottomNavigationBarItems(context),
-                ),
+              borderRadius: BorderRadius.circular(30),
+              color: Colors.white,
+            ),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+              child: BottomNavigationBar(
+                selectedFontSize: 12,
+                unselectedFontSize: 10.0,
+
+                selectedLabelStyle: const TextStyle(fontSize: 12),
+                type: BottomNavigationBarType.fixed,
+                elevation: 0,
+                unselectedItemColor: Colors.black38,
+                selectedItemColor: Theme.of(context).primaryColor,
+                currentIndex: currentIndex,
+                onTap: (value) {
+                  currentIndex = value;
+                  setState(() {});
+                },
+                items: bottomNavigationBarItems(context),
               ),
             ),
           ),
           body: screens[currentIndex],
         );
       },
-    );
-  }
-}
-
-class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-      child: Container(
-        height: 60,
-        decoration: BoxDecoration(
-          border: const Border(
-            top: BorderSide(width: 0.5, color: Colors.black),
-            right: BorderSide(width: 0.5, color: Colors.black),
-            left: BorderSide(width: 0.5, color: Colors.black),
-          ),
-          borderRadius: BorderRadius.circular(30),
-          color: Colors.white,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: BottomNavigationBar(
-            unselectedItemColor: Colors.black38,
-            selectedItemColor: kprimaryColor,
-            backgroundColor: Colors.grey[500],
-            //currentIndex: cubit.currentIndex,
-            onTap: (value) {
-              // cubit.changeBottomNav(value);
-            },
-            items: bottomNavigationBarItems(context),
-          ),
-        ),
-      ),
     );
   }
 }

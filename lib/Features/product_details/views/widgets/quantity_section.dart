@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class QuantitySection extends StatefulWidget {
-  const QuantitySection({super.key, });
+  const QuantitySection({super.key, required this.onChanged});
+  final Function(int) onChanged;
 
   @override
   State<QuantitySection> createState() => _QuantitySectionState();
@@ -9,11 +10,10 @@ class QuantitySection extends StatefulWidget {
 
 class _QuantitySectionState extends State<QuantitySection> {
   int quantity = 1;
- // الكمية الافتراضية
+  // الكمية الافتراضية
   @override
-
   Widget build(BuildContext context) {
-     return Row(
+    return Row(
       children: [
         const Text(
           "Quantity",
@@ -30,7 +30,8 @@ class _QuantitySectionState extends State<QuantitySection> {
               IconButton(
                 icon: const Icon(Icons.remove, size: 20),
                 onPressed: () {
-                  if (quantity > 1) setState(() =>quantity--);
+                  if (quantity > 1) setState(() => quantity--);
+                  widget.onChanged(quantity);
                 },
               ),
               Text(
@@ -42,7 +43,10 @@ class _QuantitySectionState extends State<QuantitySection> {
               ),
               IconButton(
                 icon: const Icon(Icons.add, size: 20),
-                onPressed: () => setState(() => quantity++),
+                onPressed: () {
+                  setState(() => quantity++);
+                  widget.onChanged(quantity);
+                },
               ),
             ],
           ),
