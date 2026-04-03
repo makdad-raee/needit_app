@@ -72,7 +72,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<UpdateQuantityEvent>((event, emit) async {
       final List<CartItemEntity> currentItems = List.from(state.cart.items);
       final index = currentItems.indexWhere(
-        (item) => item.productEntity.id == event.product.id,
+        (item) =>
+            item.productEntity.id == event.cartItem.productEntity.id &&
+            item.selectedSize == event.cartItem.selectedSize &&
+            item.selectedColor == event.cartItem.selectedColor,
       );
 
       if (index != -1) {
@@ -96,6 +99,25 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         (failure) => emit(state.copyWith(errorMessage: failure.message)),
         (success) => emit(state.copyWith(cart: CartEntity(items: []))),
       );
+    });
+    // 4. عند حذف منتج من السلة (Löschen)
+    on<RemoveFromCartEvent>((event, emit) async {
+      final List<CartItemEntity> currentItems = List.from(state.cart.items);
+
+      // نبحث عن العنصر المطابق تماماً ونحذفه
+      currentItems.removeWhere(
+        (item) =>
+            item.productEntity.id == event.cartItem.productEntity.id &&
+            item.selectedSize == event.cartItem.selectedSize &&
+            item.selectedColor == event.cartItem.selectedColor,
+      );
+
+      // تحديث واجهة المستخدم فوراً
+      final newCart = CartEntity(items: currentItems);
+      emit(state.copyWith(cart: newCart));
+
+      // حفظ التعديل في الداتا بيز المحلية
+      await cacheCartUseCase(currentItems);
     });
   }
 }

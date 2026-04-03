@@ -17,12 +17,14 @@ class CartItemModel extends CartItemEntity {
       selectedColor: entity.selectedColor,
     );
   }
+
   factory CartItemModel.fromMap(Map<String, dynamic> map) {
     return CartItemModel(
-      productEntity: ProductModel.fromMap(
-        map['product'],
-      ), // نفترض وجود ProductModel
+      productEntity: ProductModel.fromMap(map['product']),
       quantity: map['quantity'] as int,
+      // 👇 التعديل هنا: قراءة اللون والقياس من الكاش
+      selectedSize: map['selectedSize'] as String?,
+      selectedColor: map['selectedColor'] as int?,
     );
   }
 
@@ -30,6 +32,9 @@ class CartItemModel extends CartItemEntity {
     return {
       'product': (productEntity as ProductModel).toMap(),
       'quantity': quantity,
+      // 👇 التعديل هنا: حفظ اللون والقياس في الكاش
+      'selectedSize': selectedSize,
+      'selectedColor': selectedColor,
     };
   }
 }

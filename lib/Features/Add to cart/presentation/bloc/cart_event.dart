@@ -1,5 +1,6 @@
 // --- Events ---
 import 'package:equatable/equatable.dart';
+import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_item_entity.dart';
 import 'package:needit_app/core/get_products/Domain/entity/product_entity.dart';
 
 abstract class CartEvent extends Equatable {
@@ -25,9 +26,18 @@ class AddToCartEvent extends CartEvent {
 }
 
 class UpdateQuantityEvent extends CartEvent {
-  final ProductEntity product;
+  final CartItemEntity cartItem;
   final int quantity;
-  const UpdateQuantityEvent(this.product, this.quantity);
+  const UpdateQuantityEvent(this.cartItem, this.quantity);
 }
 
 class ClearCartEvent extends CartEvent {} // لمسح السلة بعد إتمام الطلب
+
+class RemoveFromCartEvent extends CartEvent {
+  final CartItemEntity cartItem;
+
+  const RemoveFromCartEvent(this.cartItem);
+
+  @override
+  List<Object> get props => [cartItem];
+}

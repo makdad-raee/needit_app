@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needit_app/Features/Add%20to%20cart/Domain/Entities/cart_item_entity.dart';
+import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_bloc.dart';
+import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_event.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/widgets/cart_item_delete.dart';
 import 'package:needit_app/Features/Add%20to%20cart/presentation/widgets/custom_bottom_delete.dart';
-import 'package:needit_app/Features/Add%20to%20cart/presentation/widgets/product_item_for_cart.dart';
 import 'package:needit_app/constant.dart';
 
 class BottomsheetWidgetForDelete extends StatelessWidget {
-  const BottomsheetWidgetForDelete({
-    super.key,
-    this.productItemForCart,
-    required this.cartItem,
-  });
+  const BottomsheetWidgetForDelete({super.key, required this.cartItem});
 
-  final ProductItemForCart? productItemForCart;
   final CartItemEntity cartItem;
 
   @override
@@ -60,13 +57,8 @@ class BottomsheetWidgetForDelete extends StatelessWidget {
                   text: 'Yes, Remove',
                   textColor: Colors.black,
                   onPressed: () {
-                    // BlocProvider.of<MyCartBloc>(context).add(
-                    //   RemoveFromCartEvent(
-                    //     id: productItemForCart.cartList.id,
-                    //     cartEntity: productItemForCart.cartList,
-                    //   ),
-                    // );
-                    // Navigator.of(context).pop(); // Close the dialog
+                    context.read<CartBloc>().add(RemoveFromCartEvent(cartItem));
+                    Navigator.of(context).pop(); // Close the dialog
                   },
                 ),
               ],

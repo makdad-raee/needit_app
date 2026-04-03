@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_bloc.dart';
-import 'package:needit_app/Features/Add%20to%20cart/presentation/bloc/cart_event.dart';
 
 class BottomActionBar extends StatefulWidget {
   const BottomActionBar({

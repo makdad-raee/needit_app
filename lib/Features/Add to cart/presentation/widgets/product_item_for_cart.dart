@@ -37,7 +37,8 @@ class ProductItemForCart extends StatelessWidget {
                   children: [
                     // اسم المنتج وحذف العنصر
                     _buildNameAndDelete(context),
-
+                    // 2. اللون والقياس) لو موجودين
+                    _buildAttributes(),
                     // السعر والتحكم بالكمية
                     _buildPriceAndCounter(context),
                   ],
@@ -119,10 +120,7 @@ class ProductItemForCart extends StatelessWidget {
                 onPressed: () {
                   if (cartItem.quantity > 1) {
                     context.read<CartBloc>().add(
-                      UpdateQuantityEvent(
-                        cartItem.productEntity,
-                        cartItem.quantity - 1,
-                      ),
+                      UpdateQuantityEvent(cartItem, cartItem.quantity - 1),
                     );
                   }
                 },
@@ -135,10 +133,7 @@ class ProductItemForCart extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   context.read<CartBloc>().add(
-                    UpdateQuantityEvent(
-                      cartItem.productEntity,
-                      cartItem.quantity + 1,
-                    ),
+                    UpdateQuantityEvent(cartItem, cartItem.quantity + 1),
                   );
                 },
                 icon: const Icon(Icons.add, size: 20),
@@ -158,6 +153,43 @@ class ProductItemForCart extends StatelessWidget {
             cartItem:
                 cartItem, // تأكد من تعديل الـ Widget المستقبلة لتأخذ Item واحد
           ),
+    );
+  }
+
+  Widget _buildAttributes() {
+    // إذا كان المنتج ما إلو لا لون ولا قياس، ما بنعرض شي
+    if (cartItem.selectedSize == null && cartItem.selectedColor == null) {
+      return const SizedBox.shrink();
+    }
+
+    return Row(
+      children: [
+        // عرض القياس (إذا وجد)
+        if (cartItem.selectedSize != null) ...[
+          Text(
+            'Size: ${cartItem.selectedSize}',
+            style: const TextStyle(color: Colors.grey, fontSize: 13),
+          ),
+          const SizedBox(width: 12), // مسافة بين القياس واللون
+        ],
+
+        // عرض اللون كدائرة (إذا وجد)
+        if (cartItem.selectedColor != null) ...[
+          const Text(
+            'Color: ',
+            style: TextStyle(color: Colors.grey, fontSize: 13),
+          ),
+          Container(
+            width: 14,
+            height: 14,
+            decoration: BoxDecoration(
+              color: Color(cartItem.selectedColor!), // تحويل الـ int للون
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.grey.shade300),
+            ),
+          ),
+        ],
+      ],
     );
   }
 }
