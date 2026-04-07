@@ -88,5 +88,22 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
       }
     });
+    // 1. تحميل البيانات الأولية (للـ Checkout)
+    on<LoadUserAddressesEvent>((event, emit) {
+      emit(state.copyWith(isLoading: true));
+
+      final addressModels =
+          dummyAddresses.map((e) => AddressModel.fromEntity(e)).toList();
+
+      emit(
+        state.copyWith(
+          isLoading: false,
+          addresses: addressModels,
+          selectedAddress:
+              state.selectedAddress ??
+              (addressModels.isNotEmpty ? addressModels.first : null),
+        ),
+      );
+    });
   }
 }

@@ -10,7 +10,7 @@ class AccountViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,7 +20,7 @@ class AccountViewBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               child: Divider(thickness: 1, color: Colors.black12),
             ),
-            SizedBox(height: 26),
+            const SizedBox(height: 26),
             AccountViewBodySection2(userEntity: userEntity),
           ],
         ),

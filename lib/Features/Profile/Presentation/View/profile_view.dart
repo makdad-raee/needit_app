@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:needit_app/Features/Profile/Presentation/View/widgets/Profile_view_body.dart';
+import 'package:needit_app/Features/Profile/Presentation/View/widgets/profile_view_body.dart';
 import 'package:needit_app/constant.dart';
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+class EditProfileView extends StatelessWidget {
+  const EditProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +21,14 @@ class ProfileView extends StatelessWidget {
         shadowColor: Colors.white,
         backgroundColor: Colors.white,
         title: Text(
-          'Fill Your Profile',
+          'Edit Profile',
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontSize: 18,
             fontFamily: kRubikRubikMedium,
           ),
         ),
       ),
-      body: ProfileViewBody(),
+      body: const ProfileViewBody(), // 👈 أضفنا const هنا
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:needit_app/constant.dart';
 
-class orderDetilsItemForHorizental extends StatelessWidget {
-  const orderDetilsItemForHorizental({super.key, required this.index});
+class OrderDetilsItemForHorizental extends StatelessWidget {
+  const OrderDetilsItemForHorizental({super.key, required this.index});
   final int index;
 
   @override

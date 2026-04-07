@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:needit_app/Features/Account/Presentation/View/Widgets/option_profile.dart';
 import 'package:needit_app/Features/Auth/Domain/entites/user_untity.dart';
 import 'package:needit_app/Features/Profile/Presentation/View/profile_view.dart';
+import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_bloc.dart';
+import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_event.dart';
+import 'package:needit_app/Features/checkout/Presentation/view/shipping_address.dart';
 import 'package:needit_app/constant.dart';
 
 class AccountViewBodySection2 extends StatelessWidget {
@@ -20,13 +24,21 @@ class AccountViewBodySection2 extends StatelessWidget {
           onTap: () {
             Navigator.of(
               context,
-            ).push(MaterialPageRoute(builder: (context) => ProfileView()));
+            ).push(MaterialPageRoute(builder: (context) => EditProfileView()));
           },
         ),
         SizedBox(height: 22),
         OptionProfile(
           svgPath: 'assets/images/locationsvg.svg',
           text: 'Address',
+          onTap: () {
+            context.read<CheckoutBloc>().add(const LoadUserAddressesEvent());
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ShippingAddress(isFromProfile: true),
+              ),
+            );
+          },
         ),
         SizedBox(height: 22),
         OptionProfile(
@@ -34,10 +46,7 @@ class AccountViewBodySection2 extends StatelessWidget {
           text: 'Notification',
         ),
         SizedBox(height: 22),
-        OptionProfile(
-          svgPath: 'assets/images/paymentsvg.svg',
-          text: '  Payment',
-        ),
+        OptionProfile(svgPath: 'assets/images/paymentsvg.svg', text: 'Payment'),
         SizedBox(height: 22),
         OptionProfile(
           svgPath: 'assets/images/securitysvg.svg',
@@ -51,48 +60,63 @@ class AccountViewBodySection2 extends StatelessWidget {
         SizedBox(height: 22),
         OptionProfile(
           svgPath: 'assets/images/helpcenter.svg',
-          text: ' Help Center',
+          text: 'Help Center',
         ),
         SizedBox(height: 22),
         OptionProfile(
           svgPath: 'assets/images/invitefrienfsvg.svg',
-          text: ' Invite Friends',
+          text: 'Invite Friends',
         ),
         SizedBox(height: 22),
         OptionProfile(
           svgPath: 'assets/images/privacysecurysvg.svg',
-          text: ' Privacy Policy  ',
+          text: 'Privacy Policy',
         ),
         SizedBox(height: 22),
-        LogoutButton(svgPath: 'assets/images/logoutsvg.svg', text: ' Logout  '),
+        LogoutButton(
+          svgPath: 'assets/images/logoutsvg.svg',
+          text: 'Logout',
+          onTap: () {},
+        ),
       ],
     );
   }
 }
 
 class LogoutButton extends StatelessWidget {
-  const LogoutButton({super.key, required this.text, required this.svgPath});
+  const LogoutButton({
+    super.key,
+    required this.text,
+    required this.svgPath,
+    this.onTap,
+  });
   final String text;
   final String svgPath;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SvgPicture.asset(
-          svgPath,
-          colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
-        ),
-        SizedBox(width: 8),
-        Text(
-          text,
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            fontSize: 16,
-            fontFamily: kRubikRubikRegular,
-            color: Colors.red,
+    return InkWell(
+      onTap: () {
+        // Handle logout action
+      },
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            svgPath,
+            colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
           ),
-        ),
-      ],
+          SizedBox(width: 8),
+          Text(
+            text,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontSize: 16,
+              fontFamily: kRubikRubikRegular,
+              color: Colors.red,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

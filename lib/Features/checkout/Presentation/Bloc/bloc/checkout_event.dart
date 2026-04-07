@@ -67,3 +67,11 @@ class ConfirmOrderEvent extends CheckoutEvent {
   @override
   List<Object?> get props => [userId, cartItems];
 }
+
+//get Adresses to address view in profile view
+class LoadUserAddressesEvent extends CheckoutEvent {
+  const LoadUserAddressesEvent();
+
+  @override
+  List<Object?> get props => [];
+}

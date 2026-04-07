@@ -11,7 +11,7 @@ class HorizentalSCrollDetailsOrder extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemBuilder:
-            (context, index) => orderDetilsItemForHorizental(index: index),
+            (context, index) => OrderDetilsItemForHorizental(index: index),
         separatorBuilder: (context, index) => SizedBox(width: 8),
         itemCount: 5,
       ),

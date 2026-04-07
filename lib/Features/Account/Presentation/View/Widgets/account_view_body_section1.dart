@@ -11,8 +11,8 @@ class AccountViewBodySection1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ProfilePicture(),
-        SizedBox(height: 10),
+        const ProfilePicture(),
+        const SizedBox(height: 10),
         Text(
           userEntity.name,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(

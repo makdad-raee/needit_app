@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_bloc.dart';
-import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_event.dart';
 import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_state.dart';
 import 'package:needit_app/Features/checkout/Presentation/view/shipping_address.dart';
 import 'package:needit_app/constant.dart';
@@ -34,8 +33,6 @@ class CheckoutLocation extends StatelessWidget {
                   offset: const Offset(0, 0), // changes position of shadow
                 ),
               ],
-              // boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.1), blurRadius: 5)],
-              // border: Border.all(width: 1, color: Colors.grey[200]!),
             ),
             child: Row(
               children: [

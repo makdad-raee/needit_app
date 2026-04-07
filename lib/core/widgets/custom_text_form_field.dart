@@ -8,11 +8,17 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.keyboardType,
+    this.controller,
+    this.readOnly = false,
+    this.onTap,
   });
   final String text;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
+  final TextEditingController? controller;
+  final bool readOnly;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +30,9 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: TextFormField(
+        controller: controller,
+        readOnly: readOnly,
+        onTap: onTap,
         keyboardType: keyboardType,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
           fontSize: 12,

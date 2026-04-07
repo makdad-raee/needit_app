@@ -5,8 +5,8 @@ import 'package:needit_app/Features/Profile/Presentation/View/reset_password_vie
 import 'package:needit_app/constant.dart';
 import 'package:needit_app/core/widgets/comtinue_buttom.dart';
 
-class CreatePinForProifileBody extends StatelessWidget {
-  const CreatePinForProifileBody({super.key});
+class CreatePinForProfileBody extends StatelessWidget {
+  const CreatePinForProfileBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class CreatePinForProifileBody extends StatelessWidget {
           ),
           ContinueBottom(
             onTap: () {
-              showDeleteDialog(context);
+              showSuccessDialog(context);
             },
           ),
         ],
@@ -67,7 +67,7 @@ class CreatePinForProifileBody extends StatelessWidget {
     );
   }
 
-  void showDeleteDialog(BuildContext context) {
+  void showSuccessDialog(BuildContext context) {
     showDialog(
       //  barrierColor: Colors.red.withOpacity(0.1),
       context: context,
@@ -154,48 +154,52 @@ class CreatePinForProifileBody extends StatelessWidget {
             actions: [
               Row(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop(); // Dismiss the dialog
-                    },
-                    child: Container(
-                      height: 45,
-                      padding: EdgeInsets.symmetric(horizontal: 58),
-                      decoration: BoxDecoration(
-                        color: Colors.black12,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Skip',
-                          style: Theme.of(context).textTheme.bodyMedium!
-                              .copyWith(fontFamily: kRubikBold, fontSize: 16),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop(); // Dismiss the dialog
+                      },
+                      child: Container(
+                        height: 45,
+
+                        decoration: BoxDecoration(
+                          color: Colors.black12,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Skip',
+                            style: Theme.of(context).textTheme.bodyMedium!
+                                .copyWith(fontFamily: kRubikBold, fontSize: 16),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ResetPasswordView(),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ResetPasswordView(),
+                          ),
+                        );
+                        // Navigator.of(context).pop(); // Dismiss the dialog
+                      },
+                      child: Container(
+                        height: 45,
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                      );
-                      // Navigator.of(context).pop(); // Dismiss the dialog
-                    },
-                    child: Container(
-                      height: 45,
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Continue',
-                          style: Theme.of(context).textTheme.bodyMedium!
-                              .copyWith(fontFamily: kRubikBold, fontSize: 16),
+                        child: Center(
+                          child: Text(
+                            'Continue',
+                            style: Theme.of(context).textTheme.bodyMedium!
+                                .copyWith(fontFamily: kRubikBold, fontSize: 16),
+                          ),
                         ),
                       ),
                     ),

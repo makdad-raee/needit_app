@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+
 import 'package:needit_app/Features/checkout/Presentation/view/Widgets/shipping_address_body.dart';
 import 'package:needit_app/constant.dart';
+// تأكد من الاسم
 
+// 1. الشاشة الرئيسية
 class ShippingAddress extends StatelessWidget {
-  const ShippingAddress({super.key});
+  final bool isFromProfile; // المتغير السحري
+
+  const ShippingAddress({super.key, this.isFromProfile = false});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'Shipping Address',
+          isFromProfile ? 'Address' : 'Shipping Address', // تغيير ذكي للعنوان
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             fontFamily: kRubikRubikMedium,
             fontSize: 18,
@@ -23,7 +29,9 @@ class ShippingAddress extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ShippingAddressBody(),
+        child: ShippingAddressBody(
+          isFromProfile: isFromProfile,
+        ), // نمرر المتغير
       ),
     );
   }
