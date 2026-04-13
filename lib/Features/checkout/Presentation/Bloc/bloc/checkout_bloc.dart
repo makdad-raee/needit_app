@@ -28,7 +28,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         state.copyWith(
           isLoading: false,
           addresses: currentAddresses,
-          selectedAddress: null,
+          selectedAddress: initialAddress,
           shippingMethods: shippingModels,
           subTotal: event.subTotal,
           totalAmount: event.subTotal, // لسه ما اخترنا شحن
