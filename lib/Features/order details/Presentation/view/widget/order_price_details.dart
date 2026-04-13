@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:needit_app/constant.dart';
 
-class orderPriceDetails extends StatelessWidget {
-  const orderPriceDetails({super.key});
+class OrderPriceDetails extends StatelessWidget {
+  const OrderPriceDetails({super.key});
 
   @override
   Widget build(BuildContext context) {

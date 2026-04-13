@@ -75,3 +75,13 @@ class LoadUserAddressesEvent extends CheckoutEvent {
   @override
   List<Object?> get props => [];
 }
+
+// حدث حفظ أو تحديث العنوان
+class SaveAddressEvent extends CheckoutEvent {
+  final AddressEntity address;
+
+  const SaveAddressEvent(this.address);
+
+  @override
+  List<Object?> get props => [address];
+}

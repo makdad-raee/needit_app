@@ -1,5 +1,4 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needit_app/Features/Auth/Domain/entites/user_untity.dart';
 import 'package:needit_app/Features/Login/Domain/usecase/login_use_case.dart';
 

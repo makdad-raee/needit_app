@@ -1,7 +1,6 @@
 part of 'login_bloc.dart';
 
-@immutable
-sealed class LoginState {}
+abstract class LoginState {}
 
 class LoginInitial extends LoginState {}
 

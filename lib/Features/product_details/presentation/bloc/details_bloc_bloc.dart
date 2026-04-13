@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+
 import 'package:needit_app/Features/product_details/Domain/Entities/details_entity.dart';
 import 'package:needit_app/Features/product_details/Domain/Use%20case/get_details_use_case.dart';
 import 'package:needit_app/core/error/failure.dart';

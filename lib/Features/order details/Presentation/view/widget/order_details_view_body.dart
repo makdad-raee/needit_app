@@ -35,7 +35,7 @@ class ORderdetailsSection1 extends StatelessWidget {
           ),
         ),
         SizedBox(height: 15),
-        orderPriceDetails(),
+        OrderPriceDetails(),
         SizedBox(height: 32),
         Divider(thickness: 0.6, color: Color(0xff9F9F9F)),
         SizedBox(height: 23),

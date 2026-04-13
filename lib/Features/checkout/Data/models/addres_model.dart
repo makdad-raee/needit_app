@@ -5,6 +5,8 @@ class AddressModel extends AddressEntity {
     required super.title,
     required super.addressLine,
     super.isSelected,
+    required super.latitude,
+    required super.longitude,
   });
 
   // تحويل من Entity لموديل (بستخدمها لما بدي أبعت داتا)
@@ -13,6 +15,8 @@ class AddressModel extends AddressEntity {
       title: entity.title,
       addressLine: entity.addressLine,
       isSelected: entity.isSelected,
+      latitude: entity.latitude,
+      longitude: entity.longitude,
     );
   }
 
@@ -22,6 +26,8 @@ class AddressModel extends AddressEntity {
       title: map['title'] ?? 'No Title',
       addressLine: map['addressLine'] ?? 'No Address Line',
       isSelected: map['isSelected'] ?? false,
+      latitude: map['latitude'] ?? 0.0,
+      longitude: map['longitude'] ?? 0.0,
     );
   }
 
@@ -31,6 +37,8 @@ class AddressModel extends AddressEntity {
       'title': title,
       'addressLine': addressLine,
       'isSelected': isSelected,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 }

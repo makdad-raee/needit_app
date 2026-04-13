@@ -54,11 +54,11 @@ class PrpomoItem extends StatelessWidget {
   final bool isSelected;
   const PrpomoItem({
     super.key,
-    this.SvgPath,
+    this.svgPath,
     required this.text,
     this.isSelected = false,
   });
-  final String? SvgPath;
+  final String? svgPath;
   final String text;
 
   @override
@@ -88,7 +88,7 @@ class PrpomoItem extends StatelessWidget {
                 radius: 30,
                 backgroundColor: Theme.of(context).primaryColor,
                 child: SvgPicture.asset(
-                  SvgPath ?? 'assets/images/promosvg.svg',
+                  svgPath ?? 'assets/images/promosvg.svg',
 
                   ///   color: kprimaryColor,
                 ),

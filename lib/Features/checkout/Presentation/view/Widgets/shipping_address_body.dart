@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:needit_app/Features/checkout/Domain/entities/address_entity.dart';
 import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_bloc.dart';
 import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_event.dart';
 import 'package:needit_app/Features/checkout/Presentation/Bloc/bloc/checkout_state.dart';
@@ -44,6 +45,7 @@ class ShippingAddressBody extends StatelessWidget {
                             }
                           },
                           child: AddressItem(
+                            address: address,
                             isSelected: isSelected,
                             isFromProfile: isFromProfile, // نمرر المتغير
                             addressName: address.title,
@@ -80,6 +82,10 @@ class ShippingBodySection2 extends StatelessWidget {
           containerColor: const Color(0xffEDEDED),
           text: 'Add New Address',
           onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EditAddressView()),
+            );
             // الانتقال لشاشة إضافة عنوان جديد (خريطة)
           },
         ),
@@ -106,6 +112,7 @@ class AddressItem extends StatelessWidget {
   final bool isFromProfile;
   final String addressName;
   final String addressDetails;
+  final AddressEntity address;
 
   const AddressItem({
     super.key,
@@ -113,6 +120,7 @@ class AddressItem extends StatelessWidget {
     this.isFromProfile = false,
     required this.addressName,
     required this.addressDetails,
+    required this.address,
   });
 
   @override
@@ -152,7 +160,7 @@ class AddressItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  addressName,
+                  address.title,
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -160,7 +168,7 @@ class AddressItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  addressDetails,
+                  address.addressLine,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     fontSize: 12,
@@ -180,7 +188,9 @@ class AddressItem extends StatelessWidget {
                 // فتح شاشة تعديل هذا العنوان
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EditAddressView()),
+                  MaterialPageRoute(
+                    builder: (context) => EditAddressView(address: address),
+                  ),
                 );
               },
               child: const Icon(Icons.edit, size: 20, color: Colors.black54),

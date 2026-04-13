@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
@@ -28,14 +30,14 @@ class PaymentPinViewBody extends StatelessWidget {
             itemSize: 50,
             margin: const EdgeInsets.all(10),
             onEditing: (value) {
-              print(value);
+              log(value.toString());
               if (value != true) {
-                print('oooooooooooooooo');
-                print('Navigate');
+                log('oooooooooooooooo');
+                log('Navigate');
               }
             },
             onCompleted: (value) {
-              print(value);
+              log(value.toString());
               //Value users input it
             },
             textStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(

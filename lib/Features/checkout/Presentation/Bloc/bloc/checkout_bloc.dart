@@ -14,22 +14,21 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     // 1. تحميل البيانات الأولية
     on<LoadCheckoutInitialData>((event, emit) {
       emit(state.copyWith(isLoading: true));
+      final currentAddresses = state.addresses;
 
-      // منستخدم الـ Dummy Data اللي عرفناها سابقاً
-      final addressModels =
-          dummyAddresses.map((e) => AddressModel.fromEntity(e)).toList();
       final shippingModels =
           dummyShippingMethods
               .map((e) => ShippingMethodModel.fromEntity(e))
               .toList();
-
-      final initialAddress = addressModels.first; // افتراضياً أول عنوان
-
+      // إذا مافي عنوان محدد، نختار أول عنوان في القائمة (إذا كانت القائمة مو فاضية)
+      final initialAddress =
+          state.selectedAddress ??
+          (currentAddresses.isNotEmpty ? currentAddresses.first : null);
       emit(
         state.copyWith(
           isLoading: false,
-          addresses: addressModels,
-          selectedAddress: initialAddress,
+          addresses: currentAddresses,
+          selectedAddress: null,
           shippingMethods: shippingModels,
           subTotal: event.subTotal,
           totalAmount: event.subTotal, // لسه ما اخترنا شحن
@@ -92,16 +91,33 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     on<LoadUserAddressesEvent>((event, emit) {
       emit(state.copyWith(isLoading: true));
 
-      final addressModels =
-          dummyAddresses.map((e) => AddressModel.fromEntity(e)).toList();
+      final currentAddresses = state.addresses;
 
       emit(
         state.copyWith(
           isLoading: false,
-          addresses: addressModels,
-          selectedAddress:
-              state.selectedAddress ??
-              (addressModels.isNotEmpty ? addressModels.first : null),
+          addresses: currentAddresses,
+          selectedAddress: null,
+        ),
+      );
+    });
+    // 6. حفظ عنوان جديد أو تحديثه
+    on<SaveAddressEvent>((event, emit) {
+      // تحويل الـ Entity القادم من الشاشة إلى Model
+      final newAddressModel = AddressModel.fromEntity(event.address);
+
+      // أخذ نسخة من العناوين القديمة وإضافة العنوان الجديد لها
+      final List<AddressModel> updatedList = List.from(state.addresses)
+        ..add(newAddressModel);
+
+      // إذا كانت القائمة السابقة فارغة، نجعل هذا العنوان هو "المختار افتراضياً"
+      final newSelectedAddress = state.selectedAddress ?? newAddressModel;
+
+      // تحديث واجهة المستخدم (UI)
+      emit(
+        state.copyWith(
+          addresses: updatedList,
+          selectedAddress: newSelectedAddress,
         ),
       );
     });
